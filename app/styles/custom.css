@@ -25,13 +25,23 @@ a {
     background-color: #FFF;
 }
 
+.navbar-default .sidebar{
+  background-color: #16a085;
+    border-color: #16a085;
+}
+
+.navbar-brand>img {
+    display: block;
+    margin-top: -6px;
+}
+
 .navbar-form {
     padding: 0px 20px;
 }
 
-.navbar-default .sidebar{
-  background-color: #16a085;
-    border-color: #16a085;
+@media (min-width: 768px)
+.navbar-form .input-group>.form-control {
+    min-width: 300px;
 }
 
 .nav>li.active>a {
@@ -43,6 +53,8 @@ a {
     border-bottom: 1px solid #16a085;
 }
 
-.header-search {
-    margin-right: 40px !important;
+.btn-search {
+    color: #FFF;
+    background-color: #16A085;
+    border-color: #16A085;
 }
