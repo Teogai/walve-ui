@@ -1,14 +1,14 @@
 'use strict';
 /**
  * @ngdoc overview
- * @name sbAdminApp
+ * @name walveApp
  * @description
- * # sbAdminApp
+ * # walveApp
  *
  * Main module of the application.
  */
 angular
-  .module('sbAdminApp', [
+  .module('walveApp', [
     'oc.lazyLoad',
     'ui.router',
     'ui.bootstrap',
@@ -31,12 +31,12 @@ angular
             loadMyDirectives:function($ocLazyLoad){
                 return $ocLazyLoad.load(
                 {
-                    name:'sbAdminApp',
+                    name:'walveApp',
                     files:[
                     'scripts/directives/header/header.js',
                     'scripts/directives/header/header-notification/header-notification.js',
-                    'scripts/directives/sidebar/sidebar.js',
-                    'scripts/directives/sidebar/sidebar-search/sidebar-search.js'
+                    'scripts/directives/header/header-search/header-search.js',
+                    'scripts/directives/sidebar/sidebar.js'
                     ]
                 }),
                 $ocLazyLoad.load(
@@ -81,7 +81,7 @@ angular
         resolve: {
           loadMyFiles:function($ocLazyLoad) {
             return $ocLazyLoad.load({
-              name:'sbAdminApp',
+              name:'walveApp',
               files:[
               'scripts/controllers/main.js',
               'scripts/directives/timeline/timeline.js',
@@ -119,7 +119,7 @@ angular
               ]
             }),
             $ocLazyLoad.load({
-                name:'sbAdminApp',
+                name:'walveApp',
                 files:['scripts/controllers/chartContoller.js']
             })
           }

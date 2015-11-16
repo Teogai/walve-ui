@@ -1,0 +1,48 @@
+
+a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.navbar-default {
+    background-color: #1abc9c;
+    border-color: #1abc9c;
+}
+
+.navbar-default .navbar-brand {
+    color: #FFF;
+}
+
+.navbar-default .navbar-collapse, .navbar-default .navbar-form {
+    border-color: #1abc9c;
+}
+
+.navbar-default .navbar-toggle {
+    border-color: transparent;
+}
+
+.navbar-default .navbar-toggle .icon-bar {
+    background-color: #FFF;
+}
+
+.navbar-form {
+    padding: 0px 20px;
+}
+
+.navbar-default .sidebar{
+  background-color: #16a085;
+    border-color: #16a085;
+}
+
+.nav>li.active>a {
+    text-decoration: none;
+    background-color: #1abc9c;
+}
+
+.sidebar ul li {
+    border-bottom: 1px solid #16a085;
+}
+
+.header-search {
+    margin-right: 40px !important;
+}

@@ -5,7 +5,7 @@
  */
 
 body {
-    background-color: #f8f8f8;
+    background-color: #16a085;
 }
 
 #wrapper {
@@ -88,10 +88,6 @@ body {
 .sidebar .sidebar-nav.navbar-collapse {
     padding-right: 0;
     padding-left: 0;
-}
-
-.sidebar .sidebar-search {
-    padding: 15px;
 }
 
 .sidebar ul li {
