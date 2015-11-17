@@ -1,7 +1,10 @@
 
 a {
-    color: #ffffff;
-    text-decoration: none;
+    color: #fff;
+}
+
+a:focus, a:hover {
+    color: #fff;
 }
 
 .navbar-default {
@@ -46,6 +49,14 @@ a {
 
 .nav>li.active>a {
     text-decoration: none;
+    background-color: #1abc9c;
+}
+
+.nav>li>a {
+    padding: 10px 20px;
+}
+
+.nav>li>a:focus, .nav>li>a:hover {
     background-color: #1abc9c;
 }
 

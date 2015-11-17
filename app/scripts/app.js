@@ -74,10 +74,29 @@ angular
             }
         }
     })
+    // ============= Walve pages ============
       .state('dashboard.home',{
-        url:'/home',
+        templateUrl:'views/home.html',
+        url:'/home'
+    })
+      .state('dashboard.appointment',{
+        templateUrl:'views/appointment.html',
+        url:'/appointment'
+    })
+      .state('dashboard.schedule',{
+        templateUrl:'views/schedule.html',
+        url:'/schedule'
+    })
+      .state('dashboard.record',{
+        templateUrl:'views/record.html',
+        url:'/record'
+    })
+
+    // =========== Framework pages ==========
+      .state('dashboard.dash',{
+        url:'/dash',
         controller: 'MainCtrl',
-        templateUrl:'views/dashboard/home.html',
+        templateUrl:'views/dashboard/dashboard.html',
         resolve: {
           loadMyFiles:function($ocLazyLoad) {
             return $ocLazyLoad.load({
