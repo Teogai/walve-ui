@@ -1,10 +1,45 @@
 
+@font-face {
+    font-family: quark-light;
+    src: url(fonts/quark-light.otf);
+}
+
+@font-face {
+    font-family: quark-bold;
+    src: url(fonts/quark-bold.otf);
+}
+
+light {
+    font-family: quark-light;
+}
+
+bold {
+    font-family: quark-bold;
+}
+
+body {
+    font-family: quark-light,"Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.2;
+    background-color: #16a085;
+}
+
 a {
     color: #fff;
 }
 
 a:focus, a:hover {
     color: #fff;
+}
+
+.page-header {
+    color: #fff;
+    text-align: center;
+    padding: 2px 0 0;
+    margin: 0 -46px 20px;
+    background-color: #7f8c8d;
+    line-height: 1.5;
+    border-bottom: 0px;
 }
 
 .navbar-default {
@@ -53,7 +88,9 @@ a:focus, a:hover {
 }
 
 .nav>li>a {
-    padding: 10px 20px;
+    letter-spacing: 1px;
+    font-weight: 900;
+    padding: 14px 20px 12px;
 }
 
 .nav>li>a:focus, .nav>li>a:hover {
@@ -69,3 +106,9 @@ a:focus, a:hover {
     background-color: #16A085;
     border-color: #16A085;
 }
+
+.center-block {
+    display: table;
+    margin: 0 auto;
+}
+

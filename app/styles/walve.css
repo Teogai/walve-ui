@@ -5,6 +5,8 @@
  */
 
 body {
+    font-size: 14px;
+    line-height: 1.4285;
     background-color: #16a085;
 }
 
@@ -15,7 +17,8 @@ body {
 #page-wrapper {
     padding: 0 15px;
     min-height: 568px;
-    background-color: #fff;
+    color: #2c3e50;
+    background-color: #ecf0f1;
 }
 
 @media(min-width:768px) {
