@@ -8,7 +8,7 @@
  */
 angular.module('walveApp')
   .controller('AppointmentCtrl', function($scope) {
-  	$scope.example = {
+  	$scope.func = {
   		send: function(){
 
   		}
