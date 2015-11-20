@@ -7,14 +7,6 @@
  * Controller of the walveApp
  */
 angular.module('walveApp')
-<<<<<<< HEAD
-  .controller('AppointmentCtrl', function($scope) {
-  	$scope.func = {
-  		send: function(){
-
-  		}
-  	};
-=======
   .controller('AppointmentCtrl', function($scope, $http) {
   	$scope.laravelURL = '../../';
   	$scope.number = '';
@@ -58,5 +50,4 @@ angular.module('walveApp')
 		    // or server returns response with an error status.
 		  });
   		};
->>>>>>> origin/teogai
   });
