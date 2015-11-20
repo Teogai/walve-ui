@@ -5,7 +5,41 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-lg-6">
+		
+		<div class="col-lg-6 col-lg-push-6">
+			<div class="panel panel-default">
+				<div class="panel-body">
+	                <div class="row">
+	                    <div class="col-lg-12">
+	                        <form role="form" ng-submit="submit()">
+	                            <div class="form-group">
+	                                <label>Hospital number / Citizen ID</label>
+	                                <input class="form-control" ng-model="number">
+	                                <p class="help-block">eg. HN12345678 / 1001123456789</p>
+	                            </div>
+	                            <div class="form-group">
+	                                <label>Search by doctor’s name or department</label>
+	                                <select class="form-control" 
+	                                		ng-model="selectedType"
+	                                    	ng-options="type as type.label for type in types track by type.id">
+	                                </select>
+	                            </div>
+	                            <div class="form-group" ng-hide="selectedType.length==0">
+	                                <label>{{selectedType.label}}</label>
+	                                <select class="form-control" 
+	                                		ng-model="selectedTypeDetail"
+	                                    	ng-options="detail as detail.label for detail in selectedType.details track by detail.id">
+	                                </select>
+	                            </div>
+	                             <button type="submit" class="btn btn-default">NEXT STEP</button>
+	                        </form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-lg-6 col-lg-pull-6">
 			<p class="lead text-center">
 				<br>
 				<bold>WALVE</bold> hospital makes it easier<br>
@@ -28,46 +62,6 @@
 				<bold>0000</bold><br>
 				(Local calls)
 			</p>
-		</div>
-		<div class="col-lg-6">
-			<div class="panel panel-default">
-				 <div class="panel-body">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <form role="form">
-                            <div class="form-group">
-                                <label>Hospital number / Citizen ID</label>
-                                <input class="form-control">
-                                <p class="help-block">eg. HN12345678 / 1001123456789</p>
-                            </div>
-                            <div class="form-group">
-                                <label>Search by doctor’s name or department</label>
-                                <select class="form-control">
-                                    <option value="">Department</option>
-                                    <option value="">Doctor's name</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label>Department</label>
-                                <select class="form-control">
-                                    <option value="" selected disabled>I want to visit...</option>
-                                    <option value="">Department1</option>
-                                    <option value="">Department2</option>
-                                    <option value="">Department3</option>
-                                </select>
-                            </div>
-                            <!-- <div class="form-group">
-                                <label>Search by doctor’s name or department</label>
-                                <select class="form-control">
-                                    <option>Department</option>
-                                    <option>Doctor's name</option>
-                                </select>
-                            </div> -->
-                             <button type="submit" class="btn btn-default">NEXT STEP</button>
-                        </form>
-					</div>
-				</div>
-			</div>
 		</div>
 	</div>
 	<!-- /.row -->
