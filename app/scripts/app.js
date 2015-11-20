@@ -80,8 +80,19 @@ angular
         url:'/home'
     })
       .state('dashboard.appointment',{
+        url:'/appointment',
         templateUrl:'views/appointment.html',
-        url:'/appointment'
+        controller: 'AppointmentCtrl',
+        resolve: {
+          loadMyFiles:function($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name:'walveApp',
+              files:[
+              'scripts/controllers/appointmentController.js'
+              ]
+            })
+          }
+        }
     })
       .state('dashboard.schedule',{
         templateUrl:'views/schedule.html',
