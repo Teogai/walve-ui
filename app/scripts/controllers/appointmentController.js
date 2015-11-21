@@ -8,7 +8,7 @@
  */
 angular.module('walveApp')
   .controller('AppointmentCtrl', function($scope, $http) {
-  	$scope.laravelURL = '../../public/';
+  	$scope.laravelURL = '';
   	
   	$scope.testFunc = function(){
   		console.log('testFunc');
