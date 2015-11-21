@@ -88,7 +88,8 @@ angular
             return $ocLazyLoad.load({
               name:'walveApp',
               files:[
-              'scripts/controllers/appointmentController.js'
+              'scripts/controllers/appointmentController.js',
+              'scripts/directives/calendar/calendar.js',
               ]
             })
           }
