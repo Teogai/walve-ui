@@ -115,7 +115,10 @@ angular
         templateUrl:'views/record.html',
         url:'/record'
     })
-
+      .state('login',{
+        templateUrl:'views/pages/login.html',
+        url:'/login'
+    })
     // =========== Framework pages ==========
       .state('dashboard.dash',{
         url:'/dash',
@@ -143,10 +146,6 @@ angular
       .state('dashboard.blank',{
         templateUrl:'views/pages/blank.html',
         url:'/blank'
-    })
-      .state('login',{
-        templateUrl:'views/pages/login.html',
-        url:'/login'
     })
       .state('dashboard.chart',{
         templateUrl:'views/chart.html',
