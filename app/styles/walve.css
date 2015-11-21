@@ -32,6 +32,11 @@ body {
     background-color: #ecf0f1;
 }
 
+.col-centered{
+    float: none;
+    margin: 0 auto;
+}
+
 a {
     color: #fff;
 }
