@@ -52,10 +52,10 @@ angular.module('walveApp')
 				selectedTypeDetail : $scope.selectedTypeDetail
 			}
 		}).then(function successCallback(response) {
+		  	console.log("success");
 		  	console.log(response.data);
 		  }, function errorCallback(response) {
-		    // called asynchronously if an error occurs
-		    // or server returns response with an error status.
+		  	console.log("error");
 		  });
   		};
 
