@@ -97,7 +97,7 @@ angular.module('walveApp')
   		};
 
 
-  	$scope.changeDate = function(){
+  	$scope.confirmData.changeDate = function(){
   		$scope.showCalendar = true;
   		$scope.showConfirm = false;
   	}
