@@ -11,6 +11,7 @@ angular.module('walveApp')
   	$scope.laravelURL = '../../public/';
   	$scope.isNextStep = false;
 
+  	$scope.makeData = [];
   	$scope.makeData.number = '';
   	$scope.makeData.types = [{
 	  	id: 1,
