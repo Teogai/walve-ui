@@ -1,9 +1,9 @@
 'use strict';
 /**
  * @ngdoc function
- * @name walveApp.controller:MainCtrl
+ * @name walveApp.controller:AppointmentCtrl
  * @description
- * # MainCtrl
+ * # AppointmentCtrl
  * Controller of the walveApp
  */
 angular.module('walveApp')
@@ -41,13 +41,23 @@ angular.module('walveApp')
   	$scope.selectedTypeDetail = [];
   	$scope.submit = function(){
   		$http({
-		  method: 'GET',
-		  url: $scope.laravelURL + 'public/appointment'
+  			method: 'POST',
+			url: $scope.laravelURL + 'public/appointment',
+			headers: {
+			'Content-Type': 'application/json'
+			},
+			data: { 
+				number : $scope.number,
+				selectedType : $scope.selectedType,
+				selectedTypeDetail : $scope.selectedTypeDetail
+			}
 		}).then(function successCallback(response) {
-		  	$scope.number = response.data;
+		  	console.log(response.data);
 		  }, function errorCallback(response) {
 		    // called asynchronously if an error occurs
 		    // or server returns response with an error status.
 		  });
   		};
+
+
   });
