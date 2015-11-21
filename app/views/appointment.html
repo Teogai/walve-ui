@@ -11,7 +11,7 @@
 				<div class="panel-body">
 	                <div class="row">
 	                    <div class="col-lg-12">
-	                        <form role="form" ng-submit="submit()">
+	                        <form role="form" ng-submit="makeData.submit()">
 	                            <div class="form-group">
 	                                <label>Hospital number / Citizen ID</label>
 	                                <input class="form-control" ng-model="makeData.number">
@@ -24,8 +24,8 @@
 	                                    	ng-options="type as type.label for type in makeData.types track by type.id">
 	                                </select>
 	                            </div>
-	                            <div class="form-group" ng-hide="selectedType.length==0">
-	                                <label>{{selectedType.label}}</label>
+	                            <div class="form-group" ng-hide="makeData.selectedType.length==0">
+	                                <label>{{makeData.selectedType.label}}</label>
 	                                <select class="form-control" 
 	                                		ng-model="makeData.selectedTypeDetail"
 	                                    	ng-options="detail as detail.label for detail in makeData.selectedType.details track by detail.id">
@@ -70,28 +70,7 @@
 				<div class="panel-body">
 	                <div class="row">
 	                    <div class="col-lg-12">
-	                        <form role="form" ng-submit="submit()">
-	                            <div class="form-group">
-	                                <label>Hospital number / Citizen ID</label>
-	                                <input class="form-control" ng-model="makeData.number">
-	                                <p class="help-block">eg. HN12345678 / 1001123456789</p>
-	                            </div>
-	                            <div class="form-group">
-	                                <label>Search by doctor’s name or department</label>
-	                                <select class="form-control" 
-	                                		ng-model="makeData.selectedType"
-	                                    	ng-options="type as type.label for type in makeData.types track by type.id">
-	                                </select>
-	                            </div>
-	                            <div class="form-group" ng-hide="selectedType.length==0">
-	                                <label>{{selectedType.label}}</label>
-	                                <select class="form-control" 
-	                                		ng-model="makeData.selectedTypeDetail"
-	                                    	ng-options="detail as detail.label for detail in makeData.selectedType.details track by detail.id">
-	                                </select>
-	                            </div>
-	                             <button type="submit" class="btn btn-default">NEXT STEP</button>
-	                        </form>
+	                        
 						</div>
 					</div>
 				</div>
