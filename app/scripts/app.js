@@ -89,15 +89,27 @@ angular
               name:'walveApp',
               files:[
               'scripts/controllers/appointmentController.js',
-              'scripts/directives/calendar/calendar.js',
+              'scripts/directives/calendar/calendar.js'
               ]
             })
           }
         }
     })
       .state('dashboard.schedule',{
+        url:'/schedule',
         templateUrl:'views/schedule.html',
-        url:'/schedule'
+        controller: 'ScheduleCtrl',
+        resolve: {
+          loadMyFiles:function($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name:'walveApp',
+              files:[
+              'scripts/controllers/scheduleController.js',
+              'scripts/directives/calendar/calendar.js'
+              ]
+            })
+          }
+        }
     })
       .state('dashboard.record',{
         templateUrl:'views/record.html',
