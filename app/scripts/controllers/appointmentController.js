@@ -9,7 +9,9 @@
 angular.module('walveApp')
   .controller('AppointmentCtrl', function($scope, $http) {
   	$scope.laravelURL = '../../public/';
-  	$scope.isNextStep = false;
+  	$scope.showMake = true;
+  	$scope.showConfirm = false;
+  	$scope.showCalendar = false;
 
   	$scope.makeData = [];
   	$scope.makeData.number = '';
@@ -62,7 +64,8 @@ angular.module('walveApp')
 				selectedTypeDetail : $scope.makeData.selectedTypeDetail
 			}
 		}).then(function successCallback(response) {
-			$scope.isNextStep = true;
+			$scope.showMake = false;
+			$scope.showConfirm = true;
 			$scope.responseData = response.data;
 		  	// console.log(response.data);
 		  }, function errorCallback(response) {
@@ -81,15 +84,22 @@ angular.module('walveApp')
 			},
 			data: { 
 				number : $scope.makeData.number,
-				doctorID: $scope.confirmData.doctorID,
+				doctor: $scope.responseData.doctor,
 				date: $scope.confirmData.date
 			}
 		}).then(function successCallback(response) {
+			
 			$scope.responseData = response.data;
 		  }, function errorCallback(response) {
 		    // called asynchronously if an error occurs
 		    // or server returns response with an error status.
 		  });
   		};
+
+
+  	$scope.changeDate = function(){
+  		$scope.showCalendar = true;
+  		$scope.showConfirm = false;
+  	}
 
   });
