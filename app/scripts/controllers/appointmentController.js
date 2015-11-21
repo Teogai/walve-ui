@@ -8,9 +8,11 @@
  */
 angular.module('walveApp')
   .controller('AppointmentCtrl', function($scope, $http) {
-  	$scope.laravelURL = '../../';
-  	$scope.number = '';
-  	$scope.types = [{
+  	$scope.laravelURL = '../../public/';
+  	$scope.isNextStep = false;
+
+  	$scope.makeData.number = '';
+  	$scope.makeData.types = [{
 	  	id: 1,
 	  	label: 'Department',
 	  	details: [
@@ -37,21 +39,22 @@ angular.module('walveApp')
 	  		},
 		]
 	}];
-  	$scope.selectedType = [];
-  	$scope.selectedTypeDetail = [];
-  	$scope.submit = function(){
+  	$scope.makeData.selectedType = [];
+  	$scope.makeData.selectedTypeDetail = [];
+  	$scope.makeData.submit = function(){
   		$http({
   			method: 'POST',
-			url: $scope.laravelURL + 'public/appointment',
+			url: $scope.laravelURL + 'appointment',
 			headers: {
 			'Content-Type': 'application/json'
 			},
 			data: { 
-				number : $scope.number,
-				selectedType : $scope.selectedType,
-				selectedTypeDetail : $scope.selectedTypeDetail
+				number : $scope.makeData.number,
+				selectedType : $scope.makeData.selectedType,
+				selectedTypeDetail : $scope.makeData.selectedTypeDetail
 			}
 		}).then(function successCallback(response) {
+			$scope.isNextStep = true;
 		  	console.log(response.data);
 		  }, function errorCallback(response) {
 		    // called asynchronously if an error occurs
@@ -59,5 +62,5 @@ angular.module('walveApp')
 		  });
   		};
 
-
+  	$scope.confirmData;
   });
