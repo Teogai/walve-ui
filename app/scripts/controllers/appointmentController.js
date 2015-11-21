@@ -9,6 +9,11 @@
 angular.module('walveApp')
   .controller('AppointmentCtrl', function($scope, $http) {
   	$scope.laravelURL = '../../public/';
+  	
+  	$scope.testFunc = function(){
+  		console.log('testFunc');
+  	};
+
   	$scope.showMake = true;
   	$scope.showConfirm = false;
   	$scope.showCalendar = false;

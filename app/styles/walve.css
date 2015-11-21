@@ -37,6 +37,16 @@ body {
     margin: 0 auto;
 }
 
+.calendar-table { 
+    table-layout: fixed; 
+}
+
+.calendar-table th, .calendar-table td { 
+    width: 20%;
+    text-align: center;
+    overflow: hidden; 
+}
+
 a {
     color: #fff;
 }

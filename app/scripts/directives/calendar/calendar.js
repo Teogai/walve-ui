@@ -11,6 +11,9 @@ angular.module('walveApp')
     return {
         templateUrl:'scripts/directives/calendar/calendar.html',
         restrict: 'E',
-        replace: true,
-    }
+        transclude: true,
+        scope: {
+	        //'click': '&on-click'
+  		}
+    };
   });

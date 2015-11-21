@@ -7,7 +7,7 @@
  * Controller of the walveApp
  */
 angular.module('walveApp')
-  .controller('AppointmentCtrl', function($scope, $http) {
+  .controller('ScheduleCtrl', function($scope, $http) {
   	$scope.laravelURL = '../../public/';
   	$scope.isNextStep = false;
 
