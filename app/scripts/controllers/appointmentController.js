@@ -107,4 +107,7 @@ angular.module('walveApp')
   		$scope.showConfirm = false;
   	}
 
+  	$scope.calendar = [];
+  	$scope.calendar.month = 'November';
+  	 
   });

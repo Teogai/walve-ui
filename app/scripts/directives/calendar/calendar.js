@@ -8,12 +8,25 @@
  */
 angular.module('walveApp')
 	.directive('calendar',function() {
+
+    var controller = ['$scope', function($scope) {
+
+      $scope.calendar = $scope.data;
+      
+      $scope.clicked = function () {
+        console.log('clicked');
+        $scope.calendar.month = 'December';
+      };
+
+    }];
+
     return {
-        templateUrl:'scripts/directives/calendar/calendar.html',
-        restrict: 'E',
-        transclude: true,
-        scope: {
-	        //'click': '&on-click'
-  		}
+      templateUrl:'scripts/directives/calendar/calendar.html',
+      restrict: 'E',
+      transclude: true,
+      scope: {
+          data: '=',
+		  },
+      controller: controller,
     };
   });

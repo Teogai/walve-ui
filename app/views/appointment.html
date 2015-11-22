@@ -86,11 +86,9 @@
 	                            <label>APPOINTMENT DATE</label><br>
 	                            <label>{{responseData.earliestTime}}</label><br>
 	                            <br>
-	                            <div class="form-group">
-		                            <button class="btn btn-primary btn-lg btn-block" ng-click="confirmData.changeDate()">
-		                                CHANGE APPOINTMENT DATE
-		                            </button>
-	                            </div>
+	                            <button type="button" class="btn btn-primary btn-lg btn-block" ng-click="confirmData.changeDate()">
+	                                CHANGE APPOINTMENT DATE
+	                            </button>
 
 	                            <button type="submit" class="btn btn-outline btn-primary btn-lg btn-block">
 	                            	CONFIRM
@@ -104,6 +102,6 @@
 	</div>
 
 	<!-- ----------------------------------- Edit Date ------------------------------------ -->
-	<calendar ng-show="showCalendar" on-click="testFunc()"></calendar>
+	<calendar ng-show="showCalendar" data="calendar"></calendar>
 	<!-- /.row -->
 </div>
