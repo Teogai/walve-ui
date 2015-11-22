@@ -12,10 +12,10 @@ angular.module('walveApp')
 
   	$scope.changeSchedule = [];
   	$scope.changeSchedule.doctorID = '';
-  	$scope.changeSchedule.date = [];
+  	$scope.changeSchedule.oldDate = [];
 	$scope.changeSchedule.style = '';
-	$scope.changeSchedule.endDate = [];
-	$scope.changeSchedule.newDate = [];
+	$scope.changeSchedule.endDate = '';
+	$scope.changeSchedule.newDate = '';
 	
 	//---------------------------------------Choose date to add-----------------------------------//
    	
