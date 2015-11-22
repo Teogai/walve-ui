@@ -14,6 +14,24 @@ angular
     'ui.bootstrap',
     'angular-loading-bar',
   ])
+  .run(['$rootScope','$http', function($rootScope, $http) {
+    $rootScope.global = [];
+    $rootScope.global.laravelURL = '';
+    $rootScope.global.getUser = function(){
+      $http({
+        method: 'POST',
+        url: $rootScope.global.laravelURL + 'user'
+      }).then(function successCallback(response) {
+          $rootScope.global.user = response.data;
+          // console.log(response.data);
+        }, function errorCallback(response) {
+          // called asynchronously if an error occurs
+          // or server returns response with an error status.
+        });
+      };
+
+    $rootScope.global.getUser();
+  }])
   .config(['$stateProvider','$urlRouterProvider','$ocLazyLoadProvider',function ($stateProvider,$urlRouterProvider,$ocLazyLoadProvider) {
     
     $ocLazyLoadProvider.config({
