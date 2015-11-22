@@ -16,7 +16,7 @@ angular.module('walveApp')
 	
 	//---------------------------------------Input to find Patient-----------------------------------//
    	
-   	$scope.findByPatient.submit = function(){
+   	$scope.viewTable.submit = function(){
   		$http({
   			method: 'POST',
 			url: $scope.laravelURL + 'viewTable',
