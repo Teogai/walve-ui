@@ -7,29 +7,31 @@
  * Controller of the walveApp
  */
 angular.module('walveApp')
-  .controller('ScheduleCtrl', function($scope, $http) {
+  .controller('ChangeScheduleCtrl', function($scope, $http) {
   	$scope.laravelURL = '../../public/';
 
-  	$scope.makeSchedule = [];
-  	$scope.makeSchedule.doctorID = '';
-  	$scope.makeSchedule.date = '';
-	$scope.makeSchedule.style = '';
-	$scope.makeSchedule.endDate = '';
+  	$scope.changeSchedule = [];
+  	$scope.changeSchedule.doctorID = '';
+  	$scope.changeSchedule.oldDate = [];
+	$scope.changeSchedule.style = '';
+	$scope.changeSchedule.endDate = '';
+	$scope.changeSchedule.newDate = '';
 	
 	//---------------------------------------Choose date to add-----------------------------------//
    	
-   	$scope.makeSchedule.submit = function(){
+   	$scope.changeSchedule.submit = function(){
   		$http({
   			method: 'POST',
-			url: $scope.laravelURL + 'schedule',
+			url: $scope.laravelURL + 'changeSchedule',
 			headers: {
 			'Content-Type': 'application/json'
 			},
 			data: { 
-				doctorID : $scope.makeSchedule.doctorID,
-				date : $scope.makeSchedule.date,
-				style : $scope.makeSchedule.style,
-				endDate : $scope.makeSchedule.endDate
+				doctorID : $scope.changeSchedule.doctorID,
+				date : $scope.changeSchedule.date,
+				style : $scope.changeSchedule.style,
+				endDate : $scope.changeSchedule.endDate,
+				newDate : $scope.changeSchedule.newDate
 			}
 		}).then(function successCallback(response) {
 			$scope.responseData = response.data;

@@ -7,26 +7,30 @@
  * Controller of the walveApp
  */
 angular.module('walveApp')
-  .controller('DispenseCtrl', function($scope, $http) {
+  .controller('PostponeAppointmentCtrl', function($scope, $http) {
   	$scope.laravelURL = '../../public/';
 
-  	$scope.findPatient = [];
-  	$scope.findPatient.patientID = '';
-  	$scope.dispense = [];
-  	$scope.dispense.medicineName = '';
-  	$scope.dispense.amount = '';
+  	$scope.postpone = [];
+  	$scope.postpone.number = '';
+  	$scope.postpone.oldDate = '';
 	
-	//---------------------------------------Input to find Patient-----------------------------------//
+	$scope.confirmPostpone = [];
+	$scope.confirmPostpone.patientID = '';
+	$scope.confirmPostpone.doctor = '';
+	$scope.confirmPostpone.newDate = '';
+	
+	//---------------------------------------Input to find appointment data------------------------------------------//
    	
-   	$scope.findPatient.submit = function(){
+   	$scope.postpone.submit = function(){
   		$http({
   			method: 'POST',
-			url: $scope.laravelURL + 'dispense',
+			url: $scope.laravelURL + 'postpone',
 			headers: {
 			'Content-Type': 'application/json'
 			},
 			data: { 
-				patientID : $scope.findPatient.patientID
+				number : $scope.postpone.number,
+				oldDate : $scope.postpone.oldDate
 			}
 		}).then(function successCallback(response) {
 			$scope.responseData = response.data;
@@ -37,19 +41,19 @@ angular.module('walveApp')
 		  });
   		};
 
-
-  	//---------------------------------------Add patient's medicine-----------------------------------------------//
-  	$scope.dispense.submit = function(){
+  	//---------------------------------------Choose New Date-----------------------------------------------//
+  	$scope.confirmPostpone.submit = function(){
   		$http({
   			method: 'POST',
-			url: $scope.laravelURL + 'dispense2',
+			url: $scope.laravelURL + 'postpone2',
 			headers: {
 			'Content-Type': 'application/json'
 			},
 			data: { 
-				patientID : $scope.findPatient.patientID,
-				medicineName: $scope.dispense.medicineName,
-				amount: $scope.dispense.amount
+				patientID : $scope.responseData.patientID,
+				doctor: $scope.responseData.doctor,
+				oldDate: $scope.postpone.date,
+				newDate: $scope.confirmPostpone.newDate
 			}
 		}).then(function successCallback(response) {
 			

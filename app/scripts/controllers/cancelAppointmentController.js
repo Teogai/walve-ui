@@ -7,29 +7,25 @@
  * Controller of the walveApp
  */
 angular.module('walveApp')
-  .controller('ScheduleCtrl', function($scope, $http) {
+  .controller('CancelAppointmentCtrl', function($scope, $http) {
   	$scope.laravelURL = '../../public/';
 
-  	$scope.makeSchedule = [];
-  	$scope.makeSchedule.doctorID = '';
-  	$scope.makeSchedule.date = '';
-	$scope.makeSchedule.style = '';
-	$scope.makeSchedule.endDate = '';
+  	$scope.cancel = [];
+  	$scope.cancel.number = '';
+  	$scope.cancel.oldDate = '';
 	
-	//---------------------------------------Choose date to add-----------------------------------//
+	//---------------------------------------Input to find appointment data------------------------------------------//
    	
-   	$scope.makeSchedule.submit = function(){
+   	$scope.cancel.submit = function(){
   		$http({
   			method: 'POST',
-			url: $scope.laravelURL + 'schedule',
+			url: $scope.laravelURL + 'cancel',
 			headers: {
 			'Content-Type': 'application/json'
 			},
 			data: { 
-				doctorID : $scope.makeSchedule.doctorID,
-				date : $scope.makeSchedule.date,
-				style : $scope.makeSchedule.style,
-				endDate : $scope.makeSchedule.endDate
+				number : $scope.cancel.number,
+				oldDate : $scope.cancel.oldDate
 			}
 		}).then(function successCallback(response) {
 			$scope.responseData = response.data;

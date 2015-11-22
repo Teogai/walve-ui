@@ -106,8 +106,38 @@ angular
             return $ocLazyLoad.load({
               name:'walveApp',
               files:[
-              'scripts/controllers/appointmentController.js',
-              'scripts/directives/calendar/calendar.js'
+                'scripts/controllers/appointmentController.js',
+                'scripts/directives/calendar/calendar.js'
+              ]
+            })
+          }
+        }
+    })
+      .state('dashboard.postponeAppointment',{
+        url:'/postponeAppointment',
+        templateUrl:'views/postponeAppointment.html',
+        controller: 'PostponeAppointmentCtrl',
+        resolve: {
+          loadMyFiles:function($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name:'walveApp',
+              files:[
+                'scripts/controllers/postponeAppointmentController.js'
+              ]
+            })
+          }
+        }
+    })
+      .state('dashboard.cancelAppointment',{
+        url:'/cancelAppointment',
+        templateUrl:'views/cancelAppointment.html',
+        controller: 'CancelAppointmentCtrl',
+        resolve: {
+          loadMyFiles:function($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name:'walveApp',
+              files:[
+                'scripts/controllers/cancelAppointmentController.js'
               ]
             })
           }
@@ -122,8 +152,104 @@ angular
             return $ocLazyLoad.load({
               name:'walveApp',
               files:[
-              'scripts/controllers/scheduleController.js',
-              'scripts/directives/calendar/calendar.js'
+                'scripts/controllers/scheduleController.js',
+                'scripts/directives/calendar/calendar.js'
+              ]
+            })
+          }
+        }
+    })
+      .state('dashboard.changeSchedule',{
+        templateUrl:'views/changeSchedule.html',
+        url:'/changeSchedule',
+        templateUrl:'views/changeSchedule.html',
+        controller: 'ChangeScheduleCtrl',
+        resolve: {
+          loadMyFiles:function($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name:'walveApp',
+              files:[
+                'scripts/controllers/changeScheduleController.js'
+              ]
+            })
+          }
+        }
+    })
+      .state('dashboard.removeSchedule',{
+        templateUrl:'views/removeSchedule.html',
+        url:'/removeSchedule',
+        templateUrl:'views/removeSchedule.html',
+        controller: 'RemoveScheduleCtrl',
+        resolve: {
+          loadMyFiles:function($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name:'walveApp',
+              files:[
+                'scripts/controllers/removeScheduleController.js'
+              ]
+            })
+          }
+        }
+    })
+      .state('dashboard.viewTable',{
+        templateUrl:'views/viewTable.html',
+        url:'/viewTable',
+        templateUrl:'views/viewTable.html',
+        controller: 'ViewTableCtrl',
+        resolve: {
+          loadMyFiles:function($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name:'walveApp',
+              files:[
+                'scripts/controllers/viewTableController.js'
+              ]
+            })
+          }
+        }
+    })
+      .state('dashboard.treatment',{
+        templateUrl:'views/treatment.html',
+        url:'/treatment',
+        templateUrl:'views/treatment.html',
+        controller: 'TreatmentCtrl',
+        resolve: {
+          loadMyFiles:function($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name:'walveApp',
+              files:[
+                'scripts/controllers/treatmentController.js'
+              ]
+            })
+          }
+        }
+    })
+      .state('dashboard.symptom',{
+        templateUrl:'views/symptom.html',
+        url:'/symptom',
+        templateUrl:'views/symptom.html',
+        controller: 'SymptomCtrl',
+        resolve: {
+          loadMyFiles:function($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name:'walveApp',
+              files:[
+                'scripts/controllers/symptomController.js'
+              ]
+            })
+          }
+        }
+    })
+      .state('dashboard.dispense',{
+        templateUrl:'views/dispense.html',
+        url:'/dispense',
+        templateUrl:'views/dispense.html',
+        controller: 'DispenseCtrl',
+        resolve: {
+          loadMyFiles:function($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name:'walveApp',
+              files:[
+                'scripts/controllers/dispenseController.js'
               ]
             })
           }
