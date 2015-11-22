@@ -8,9 +8,19 @@
  */
 angular.module('walveApp')
   .controller('AppointmentCtrl', function($scope, $http) {
-  	$scope.laravelURL = '../../';
-  	$scope.number = '';
-  	$scope.types = [{
+  	$scope.laravelURL = '';
+  	
+  	$scope.testFunc = function(){
+  		console.log('testFunc');
+  	};
+
+  	$scope.showMake = true;
+  	$scope.showConfirm = false;
+  	$scope.showCalendar = false;
+
+  	$scope.makeData = [];
+  	$scope.makeData.number = '';
+  	$scope.makeData.types = [{
 	  	id: 1,
 	  	label: 'Department',
 	  	details: [
@@ -37,27 +47,64 @@ angular.module('walveApp')
 	  		},
 		]
 	}];
-  	$scope.selectedType = [];
-  	$scope.selectedTypeDetail = [];
-  	$scope.submit = function(){
+	
+	$scope.makeData.selectedType = [];
+  	$scope.makeData.selectedTypeDetail = [];
+
+	$scope.confirmData = [];
+	$scope.confirmData.date = [];
+	
+	//---------------------------------------Input to find fastest date-----------------------------------//
+   	
+   	$scope.makeData.submit = function(){
   		$http({
   			method: 'POST',
-			url: $scope.laravelURL + 'public/appointment',
+			url: $scope.laravelURL + 'appointment',
 			headers: {
 			'Content-Type': 'application/json'
 			},
 			data: { 
-				number : $scope.number,
-				selectedType : $scope.selectedType,
-				selectedTypeDetail : $scope.selectedTypeDetail
+				number : $scope.makeData.number,
+				selectedType : $scope.makeData.selectedType,
+				selectedTypeDetail : $scope.makeData.selectedTypeDetail
 			}
 		}).then(function successCallback(response) {
-		  	console.log(response.data);
+			$scope.showMake = false;
+			$scope.showConfirm = true;
+			$scope.responseData = response.data;
+		  	// console.log(response.data);
 		  }, function errorCallback(response) {
 		    // called asynchronously if an error occurs
 		    // or server returns response with an error status.
 		  });
   		};
 
+  	//---------------------------------------Choose Date-----------------------------------------------//
+  	$scope.confirmData.submit = function(){
+  		$http({
+  			method: 'POST',
+			url: $scope.laravelURL + 'appointment',
+			headers: {
+			'Content-Type': 'application/json'
+			},
+			data: { 
+				number : $scope.makeData.number,
+				doctor: $scope.responseData.doctor,
+				date: $scope.confirmData.date
+			}
+		}).then(function successCallback(response) {
+			
+			$scope.responseData = response.data;
+		  }, function errorCallback(response) {
+		    // called asynchronously if an error occurs
+		    // or server returns response with an error status.
+		  });
+  		};
+
+
+  	$scope.confirmData.changeDate = function(){
+  		$scope.showCalendar = true;
+  		$scope.showConfirm = false;
+  	}
 
   });

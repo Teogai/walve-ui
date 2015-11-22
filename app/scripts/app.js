@@ -14,6 +14,24 @@ angular
     'ui.bootstrap',
     'angular-loading-bar',
   ])
+  .run(['$rootScope','$http', function($rootScope, $http) {
+    $rootScope.global = [];
+    $rootScope.global.laravelURL = '';
+    $rootScope.global.getUser = function(){
+      $http({
+        method: 'POST',
+        url: $rootScope.global.laravelURL + 'user'
+      }).then(function successCallback(response) {
+          $rootScope.global.user = response.data;
+          // console.log(response.data);
+        }, function errorCallback(response) {
+          // called asynchronously if an error occurs
+          // or server returns response with an error status.
+        });
+      };
+
+    $rootScope.global.getUser();
+  }])
   .config(['$stateProvider','$urlRouterProvider','$ocLazyLoadProvider',function ($stateProvider,$urlRouterProvider,$ocLazyLoadProvider) {
     
     $ocLazyLoadProvider.config({
@@ -34,7 +52,7 @@ angular
                     name:'walveApp',
                     files:[
                     'scripts/directives/header/header.js',
-                    'scripts/directives/header/header-notification/header-notification.js',
+                    'scripts/directives/header/header-user/header-user.js',
                     'scripts/directives/header/header-search/header-search.js',
                     'scripts/directives/sidebar/sidebar.js'
                     ]
@@ -88,21 +106,163 @@ angular
             return $ocLazyLoad.load({
               name:'walveApp',
               files:[
-              'scripts/controllers/appointmentController.js'
+                'scripts/controllers/appointmentController.js',
+                'scripts/directives/calendar/calendar.js'
+              ]
+            })
+          }
+        }
+    })
+      .state('dashboard.postponeAppointment',{
+        url:'/postponeAppointment',
+        templateUrl:'views/postponeAppointment.html',
+        controller: 'PostponeAppointmentCtrl',
+        resolve: {
+          loadMyFiles:function($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name:'walveApp',
+              files:[
+                'scripts/controllers/postponeAppointmentController.js'
+              ]
+            })
+          }
+        }
+    })
+      .state('dashboard.cancelAppointment',{
+        url:'/cancelAppointment',
+        templateUrl:'views/cancelAppointment.html',
+        controller: 'CancelAppointmentCtrl',
+        resolve: {
+          loadMyFiles:function($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name:'walveApp',
+              files:[
+                'scripts/controllers/cancelAppointmentController.js'
               ]
             })
           }
         }
     })
       .state('dashboard.schedule',{
+        url:'/schedule',
         templateUrl:'views/schedule.html',
-        url:'/schedule'
+        controller: 'ScheduleCtrl',
+        resolve: {
+          loadMyFiles:function($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name:'walveApp',
+              files:[
+                'scripts/controllers/scheduleController.js',
+                'scripts/directives/calendar/calendar.js'
+              ]
+            })
+          }
+        }
+    })
+      .state('dashboard.changeSchedule',{
+        templateUrl:'views/changeSchedule.html',
+        url:'/changeSchedule',
+        templateUrl:'views/changeSchedule.html',
+        controller: 'ChangeScheduleCtrl',
+        resolve: {
+          loadMyFiles:function($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name:'walveApp',
+              files:[
+                'scripts/controllers/changeScheduleController.js'
+              ]
+            })
+          }
+        }
+    })
+      .state('dashboard.removeSchedule',{
+        templateUrl:'views/removeSchedule.html',
+        url:'/removeSchedule',
+        templateUrl:'views/removeSchedule.html',
+        controller: 'RemoveScheduleCtrl',
+        resolve: {
+          loadMyFiles:function($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name:'walveApp',
+              files:[
+                'scripts/controllers/removeScheduleController.js'
+              ]
+            })
+          }
+        }
+    })
+      .state('dashboard.viewTable',{
+        templateUrl:'views/viewTable.html',
+        url:'/viewTable',
+        templateUrl:'views/viewTable.html',
+        controller: 'ViewTableCtrl',
+        resolve: {
+          loadMyFiles:function($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name:'walveApp',
+              files:[
+                'scripts/controllers/viewTableController.js'
+              ]
+            })
+          }
+        }
+    })
+      .state('dashboard.treatment',{
+        templateUrl:'views/treatment.html',
+        url:'/treatment',
+        templateUrl:'views/treatment.html',
+        controller: 'TreatmentCtrl',
+        resolve: {
+          loadMyFiles:function($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name:'walveApp',
+              files:[
+                'scripts/controllers/treatmentController.js'
+              ]
+            })
+          }
+        }
+    })
+      .state('dashboard.symptom',{
+        templateUrl:'views/symptom.html',
+        url:'/symptom',
+        templateUrl:'views/symptom.html',
+        controller: 'SymptomCtrl',
+        resolve: {
+          loadMyFiles:function($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name:'walveApp',
+              files:[
+                'scripts/controllers/symptomController.js'
+              ]
+            })
+          }
+        }
+    })
+      .state('dashboard.dispense',{
+        templateUrl:'views/dispense.html',
+        url:'/dispense',
+        templateUrl:'views/dispense.html',
+        controller: 'DispenseCtrl',
+        resolve: {
+          loadMyFiles:function($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name:'walveApp',
+              files:[
+                'scripts/controllers/dispenseController.js'
+              ]
+            })
+          }
+        }
     })
       .state('dashboard.record',{
         templateUrl:'views/record.html',
         url:'/record'
     })
-
+      .state('login',{
+        templateUrl:'views/pages/login.html',
+        url:'/login'
+    })
     // =========== Framework pages ==========
       .state('dashboard.dash',{
         url:'/dash',
@@ -130,10 +290,6 @@ angular
       .state('dashboard.blank',{
         templateUrl:'views/pages/blank.html',
         url:'/blank'
-    })
-      .state('login',{
-        templateUrl:'views/pages/login.html',
-        url:'/login'
     })
       .state('dashboard.chart',{
         templateUrl:'views/chart.html',

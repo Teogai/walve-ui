@@ -4,34 +4,37 @@
 			<h1 class="page-header">Make an appointment</h1>
 		</div>
 	</div>
-	<div class="row">
-		
+
+	<!-- ----------------------------------- Make an Appointment ------------------------------------ -->
+	<div class="row" ng-show="showMake">
 		<div class="col-lg-6 col-lg-push-6">
 			<div class="panel panel-default">
 				<div class="panel-body">
 	                <div class="row">
 	                    <div class="col-lg-12">
-	                        <form role="form" ng-submit="submit()">
+	                        <form role="form" ng-submit="makeData.submit()">
 	                            <div class="form-group">
 	                                <label>Hospital number / Citizen ID</label>
-	                                <input class="form-control" ng-model="number">
+	                                <input class="form-control" ng-model="makeData.number">
 	                                <p class="help-block">eg. HN12345678 / 1001123456789</p>
 	                            </div>
 	                            <div class="form-group">
 	                                <label>Search by doctor’s name or department</label>
 	                                <select class="form-control" 
-	                                		ng-model="selectedType"
-	                                    	ng-options="type as type.label for type in types track by type.id">
+	                                		ng-model="makeData.selectedType"
+	                                    	ng-options="type as type.label for type in makeData.types track by type.id">
 	                                </select>
 	                            </div>
-	                            <div class="form-group" ng-hide="selectedType.length==0">
-	                                <label>{{selectedType.label}}</label>
+	                            <div class="form-group" ng-hide="makeData.selectedType.length==0">
+	                                <label>{{makeData.selectedType.label}}</label>
 	                                <select class="form-control" 
-	                                		ng-model="selectedTypeDetail"
-	                                    	ng-options="detail as detail.label for detail in selectedType.details track by detail.id">
+	                                		ng-model="makeData.selectedTypeDetail"
+	                                    	ng-options="detail as detail.label for detail in makeData.selectedType.details track by detail.id">
 	                                </select>
 	                            </div>
-	                             <button type="submit" class="btn btn-default">NEXT STEP</button>
+	                            <button type="submit" class="btn btn-outline btn-primary btn-lg btn-block">
+	                             	NEXT STEP
+	                            </button>
 	                        </form>
 						</div>
 					</div>
@@ -62,5 +65,45 @@
 			</p>
 		</div>
 	</div>
+
+<!-- ----------------------------------- Confirm Data------------------------------------ -->
+	<div class="row" ng-show="showConfirm">
+		<div class="col-lg-6 col-centered">
+			<div class="panel panel-default">
+				<div class="panel-body">
+	                <div class="row">
+	                    <div class="col-lg-12 ">
+	                        <form role="form" ng-submit="confirmData.submit()">
+	                        	<label>PATIENT DATA</label><br>
+	                            <label>Hospital number: {{responseData.patient.hospital_number}}</label><br>
+	                            <label>Name: {{responseData.patient.name}}</label><br>
+	                            <label>Lastname: {{responseData.patient.lastname}}</label><br>
+	                            <br>
+	                            <label>DOCTOR DATA</label><br>
+	                            <label>Name: {{responseData.doctor.name}}</label><br>
+	                            <label>Lastname: {{responseData.doctor.lastname}}</label><br>
+	                            <br>
+	                            <label>APPOINTMENT DATE</label><br>
+	                            <label>{{responseData.earliestTime}}</label><br>
+	                            <br>
+	                            <div class="form-group">
+		                            <button class="btn btn-primary btn-lg btn-block" ng-click="confirmData.changeDate()">
+		                                CHANGE APPOINTMENT DATE
+		                            </button>
+	                            </div>
+
+	                            <button type="submit" class="btn btn-outline btn-primary btn-lg btn-block">
+	                            	CONFIRM
+	                            </button>
+	                        </form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- ----------------------------------- Edit Date ------------------------------------ -->
+	<calendar ng-show="showCalendar" on-click="testFunc()"></calendar>
 	<!-- /.row -->
 </div>
