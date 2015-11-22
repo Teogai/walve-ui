@@ -9,7 +9,7 @@
 angular.module('walveApp')
 	.directive('headerNotification',function(){
 		return {
-        templateUrl:'scripts/directives/header/header-notification/header-notification.html',
+        templateUrl:'scripts/directives/header/header-user/header-user.html',
         restrict: 'E',
         replace: true,
     	}

@@ -34,7 +34,7 @@ angular
                     name:'walveApp',
                     files:[
                     'scripts/directives/header/header.js',
-                    'scripts/directives/header/header-notification/header-notification.js',
+                    'scripts/directives/header/header-user/header-user.js',
                     'scripts/directives/header/header-search/header-search.js',
                     'scripts/directives/sidebar/sidebar.js'
                     ]
