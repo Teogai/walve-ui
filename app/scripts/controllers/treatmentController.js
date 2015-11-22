@@ -7,7 +7,7 @@
  * Controller of the walveApp
  */
 angular.module('walveApp')
-  .controller('AppointmentCtrl', function($scope, $http) {
+  .controller('TreatmentCtrl', function($scope, $http) {
   	$scope.laravelURL = '../../public/';
 
   	$scope.findPatient = [];
@@ -24,7 +24,7 @@ angular.module('walveApp')
    	$scope.findPatient.submit = function(){
   		$http({
   			method: 'POST',
-			url: $scope.laravelURL + 'appointment',
+			url: $scope.laravelURL + 'treatment',
 			headers: {
 			'Content-Type': 'application/json'
 			},
@@ -45,7 +45,7 @@ angular.module('walveApp')
   	$scope.basicData.submit = function(){
   		$http({
   			method: 'POST',
-			url: $scope.laravelURL + 'appointment',
+			url: $scope.laravelURL + 'treatment2',
 			headers: {
 			'Content-Type': 'application/json'
 			},

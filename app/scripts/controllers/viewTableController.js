@@ -7,29 +7,25 @@
  * Controller of the walveApp
  */
 angular.module('walveApp')
-  .controller('ScheduleCtrl', function($scope, $http) {
+  .controller('ViewTableCtrl', function($scope, $http) {
   	$scope.laravelURL = '../../public/';
 
-  	$scope.makeSchedule = [];
-  	$scope.makeSchedule.doctorID = '';
-  	$scope.makeSchedule.date = [];
-	$scope.makeSchedule.style = '';
-	$scope.makeSchedule.endDate = [];
+  	$scope.viewTable = [];
+  	$scope.viewTable.selectedType = [];
+  	$scope.viewTable.selectedTypeDetail = [];
 	
-	//---------------------------------------Choose date to add-----------------------------------//
+	//---------------------------------------Input to find Patient-----------------------------------//
    	
-   	$scope.makeSchedule.submit = function(){
+   	$scope.findByPatient.submit = function(){
   		$http({
   			method: 'POST',
-			url: $scope.laravelURL + 'schedule',
+			url: $scope.laravelURL + 'viewTable',
 			headers: {
 			'Content-Type': 'application/json'
 			},
 			data: { 
-				doctorID : $scope.makeSchedule.doctorID,
-				date : $scope.makeSchedule.date,
-				style : $scope.makeSchedule.style,
-				endDate : $scope.makeSchedule.endDate
+				selectedType : $scope.viewTable.selectedType,
+				selectedTypeDetail : $scope.viewTable.selectedTypeDetail
 			}
 		}).then(function successCallback(response) {
 			$scope.responseData = response.data;
@@ -39,4 +35,3 @@ angular.module('walveApp')
 		    // or server returns response with an error status.
 		  });
   		};
-  });
