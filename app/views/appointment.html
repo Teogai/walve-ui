@@ -15,7 +15,7 @@
 	                        <form role="form" ng-submit="makeData.submit()">
 	                            <div class="form-group">
 	                                <label>Hospital number / Citizen ID</label>
-	                                <input class="form-control" ng-model="makeData.number" ng-disabled="makeData.disableNumber">
+	                                <input class="form-control" ng-model="makeData.number" ng-disabled="global.user.type=='patient'">
 	                                <p class="help-block">eg. HN12345678 / 1001123456789</p>
 	                            </div>
 	                            <div class="form-group">
@@ -87,15 +87,15 @@
 						                <tbody>
 						                    <tr>
 						                        <td>Hospital number</td>
-						                        <td>{{responseData.patient.hospital_number}}</td>
+						                        <td>{{confirmData.patient.hospital_number}}</td>
 						                    </tr>
 						                    <tr>
 						                        <td>Name</td>
-						                        <td>{{responseData.patient.name}}</td>
+						                        <td>{{confirmData.patient.name}}</td>
 						                    </tr>
 						                    <tr>
 						                        <td>Lastname</td>
-						                        <td>{{responseData.patient.lastname}}</td>
+						                        <td>{{confirmData.patient.lastname}}</td>
 						                    </tr>
 						                </tbody>
 						            </table>
@@ -107,20 +107,20 @@
 						                <tbody>
 						                    <tr>
 						                        <td>Name</td>
-						                        <td>{{responseData.doctor.name}}</td>
+						                        <td>{{confirmData.doctor.name}}</td>
 						                    </tr>
 						                    <tr>
 						                        <td>Lastname</td>
-						                        <td>{{responseData.doctor.lastname}}</td>
+						                        <td>{{confirmData.doctor.lastname}}</td>
 						                    </tr>
 						                    <tr>
 						                        <td>Appointment date</td>
-						                        <td>{{responseData.earliestTime}}</td>
+						                        <td>{{confirmData.earliestTime}}</td>
 						                    </tr>
 						                </tbody>
 						            </table>
 						        </div>
-	                            <button type="button" class="btn btn-primary btn-lg btn-block" ng-click="confirmData.changeDate()">
+	                            <button type="button" class="btn btn-primary btn-lg btn-block" ng-click="changeDate()">
 	                                CHANGE APPOINTMENT DATE
 	                            </button>
 

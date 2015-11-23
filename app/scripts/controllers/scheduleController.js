@@ -17,7 +17,6 @@ angular.module('walveApp')
 	$scope.makeSchedule.endDate = '';
 	
 	$scope.calendar = [];
-  	$scope.calendar.start = '12 DEC 2014';
 
 	//---------------------------------------Choose date to add-----------------------------------//
    	

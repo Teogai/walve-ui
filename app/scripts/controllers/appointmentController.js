@@ -64,7 +64,6 @@ angular.module('walveApp')
   	$scope.makeData.disableNumber = false;
   	$scope.makeData.number = '';
   	if($scope.global.user.type == 'patient'){
-  		$scope.makeData.disableNumber = true;
   		$scope.makeData.number = $scope.global.user.data.hospital_number;
   	}
 
@@ -76,6 +75,8 @@ angular.module('walveApp')
 
 	$scope.confirmData = [];
 	$scope.confirmData.date = [];
+
+	$scope.calendar = [];
 	
 	//---------------------------------------Input to find fastest date-----------------------------------//
    	
@@ -96,6 +97,7 @@ angular.module('walveApp')
 			$scope.showMake = false;
 			$scope.showConfirm = true;
 			$scope.responseData = response.data;
+			$scope.confirmData = response.data;
 		  	// console.log(response.data);
 		  }, function errorCallback(response) {
 		    // called asynchronously if an error occurs
@@ -111,13 +113,8 @@ angular.module('walveApp')
 			headers: {
 			'Content-Type': 'application/json'
 			},
-			data: { 
-				number : $scope.makeData.number,
-				doctor: $scope.responseData.doctor,
-				date: $scope.confirmData.date
-			}
+			data: $scope.confirmData
 		}).then(function successCallback(response) {
-			
 			$scope.responseData = response.data;
 		  }, function errorCallback(response) {
 		    // called asynchronously if an error occurs
@@ -125,13 +122,10 @@ angular.module('walveApp')
 		  });
   		};
 
-
-  	$scope.confirmData.changeDate = function(){
+  	$scope.changeDate = function(){
+  		$scope.calendar.refreshTable($scope.confirmData.earliestTime);
   		$scope.showCalendar = true;
   		$scope.showConfirm = false;
-  		// $scope.calendar.refreshTable("2016-12-23");
   	}
-
-  	$scope.calendar = [];
   	 
   });
