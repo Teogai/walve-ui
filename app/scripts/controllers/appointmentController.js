@@ -8,46 +8,71 @@
  */
 angular.module('walveApp')
   .controller('AppointmentCtrl', function($scope, $http) {
-  	$scope.laravelURL = '';
+  	
+  	function setTypes(){
+  		$scope.makeData.types = [{
+		  	id: 1,
+		  	label: 'Department',
+		  	details: $scope.departmentList,
+		}, {
+			id: 2,
+			label: 'Doctor',
+			details: $scope.doctorList,
+		}];
+  	}
 
-  	$scope.calendar = [];
+  	$scope.getDepartmentList = function(){
+  		$http({
+  			method: 'POST',
+			url: $scope.global.laravelURL + 'department/get',
+			headers: {
+			'Content-Type': 'application/json'
+			}
+		}).then(function successCallback(response) {
+			$scope.departmentList = response.data;
+			$scope.getDoctorList();
+		  	// console.log(response.data);
+		  }, function errorCallback(response) {
+		    // called asynchronously if an error occurs
+		    // or server returns response with an error status.
+		  });
+  		};
+
+	$scope.getDoctorList = function(){
+  		$http({
+  			method: 'POST',
+			url: $scope.global.laravelURL + 'doctor/get',
+			headers: {
+			'Content-Type': 'application/json'
+			}
+		}).then(function successCallback(response) {
+			$scope.doctorList = response.data;
+		  	setTypes();
+		  }, function errorCallback(response) {
+		    // called asynchronously if an error occurs
+		    // or server returns response with an error status.
+		  });
+  		};
+
+  	
 
   	$scope.showMake = true;
   	$scope.showConfirm = false;
   	$scope.showCalendar = false;
 
   	$scope.makeData = [];
+  	$scope.makeData.disableNumber = false;
   	$scope.makeData.number = '';
-  	$scope.makeData.types = [{
-	  	id: 1,
-	  	label: 'Department',
-	  	details: [
-	  		{
-	  			id: 1,
-	  			label: 'Department A',	
-	  		},
-	  		{
-	  			id: 2,
-	  			label: 'Department B',	
-	  		},
-		]
-	}, {
-	  id: 2,
-	  label: 'Doctor',
-	  details: [
-	  		{
-	  			id: 1,
-	  			label: 'Doctor A',	
-	  		},
-	  		{
-	  			id: 2,
-	  			label: 'Doctor B',	
-	  		},
-		]
-	}];
-	
+  	if($scope.global.user.type == 'patient'){
+  		$scope.makeData.disableNumber = true;
+  		$scope.makeData.number = $scope.global.user.data.hospital_number;
+  	}
+
+	$scope.getDepartmentList();
+
 	$scope.makeData.selectedType = [];
-  	$scope.makeData.selectedTypeDetail = [];
+  	$scope.makeData.selectedDepartment = [];
+  	$scope.makeData.selectedDoctor = [];
 
 	$scope.confirmData = [];
 	$scope.confirmData.date = [];
@@ -57,14 +82,15 @@ angular.module('walveApp')
    	$scope.makeData.submit = function(){
   		$http({
   			method: 'POST',
-			url: $scope.laravelURL + 'appointment',
+			url: $scope.global.laravelURL + 'appointment/make',
 			headers: {
 			'Content-Type': 'application/json'
 			},
 			data: { 
 				number : $scope.makeData.number,
 				selectedType : $scope.makeData.selectedType,
-				selectedTypeDetail : $scope.makeData.selectedTypeDetail
+				selectedDepartment : $scope.makeData.selectedDepartment,
+				selectedDoctor : $scope.makeData.selectedDoctor
 			}
 		}).then(function successCallback(response) {
 			$scope.showMake = false;
@@ -81,7 +107,7 @@ angular.module('walveApp')
   	$scope.confirmData.submit = function(){
   		$http({
   			method: 'POST',
-			url: $scope.laravelURL + 'appointment',
+			url: $scope.global.laravelURL + 'appointment/confirm',
 			headers: {
 			'Content-Type': 'application/json'
 			},
@@ -106,6 +132,6 @@ angular.module('walveApp')
   		// $scope.calendar.refreshTable("2016-12-23");
   	}
 
-  	
+  	$scope.calendar = [];
   	 
   });

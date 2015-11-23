@@ -15,7 +15,7 @@
 	                        <form role="form" ng-submit="makeData.submit()">
 	                            <div class="form-group">
 	                                <label>Hospital number / Citizen ID</label>
-	                                <input class="form-control" ng-model="makeData.number">
+	                                <input class="form-control" ng-model="makeData.number" ng-disabled="makeData.disableNumber">
 	                                <p class="help-block">eg. HN12345678 / 1001123456789</p>
 	                            </div>
 	                            <div class="form-group">
@@ -25,11 +25,18 @@
 	                                    	ng-options="type as type.label for type in makeData.types track by type.id">
 	                                </select>
 	                            </div>
-	                            <div class="form-group" ng-hide="makeData.selectedType.length==0">
+	                            <div class="form-group" ng-show="makeData.selectedType.label=='Department'">
 	                                <label>{{makeData.selectedType.label}}</label>
 	                                <select class="form-control" 
-	                                		ng-model="makeData.selectedTypeDetail"
-	                                    	ng-options="detail as detail.label for detail in makeData.selectedType.details track by detail.id">
+	                                		ng-model="makeData.selectedDepartment"
+	                                    	ng-options="detail as detail.department_name for detail in makeData.selectedType.details track by detail.department_id">
+	                                </select>
+	                            </div>
+	                            <div class="form-group" ng-show="makeData.selectedType.label=='Doctor'">
+	                                <label>{{makeData.selectedType.label}}</label>
+	                                <select class="form-control" 
+	                                		ng-model="makeData.selectedDoctor"
+	                                    	ng-options="detail as detail.name for detail in makeData.selectedType.details track by detail.staff_id">
 	                                </select>
 	                            </div>
 	                            <button type="submit" class="btn btn-outline btn-primary btn-lg btn-block">
@@ -74,18 +81,45 @@
 	                <div class="row">
 	                    <div class="col-lg-12 ">
 	                        <form role="form" ng-submit="confirmData.submit()">
-	                        	<label>PATIENT DATA</label><br>
-	                            <label>Hospital number: {{responseData.patient.hospital_number}}</label><br>
-	                            <label>Name: {{responseData.patient.name}}</label><br>
-	                            <label>Lastname: {{responseData.patient.lastname}}</label><br>
-	                            <br>
-	                            <label>DOCTOR DATA</label><br>
-	                            <label>Name: {{responseData.doctor.name}}</label><br>
-	                            <label>Lastname: {{responseData.doctor.lastname}}</label><br>
-	                            <br>
-	                            <label>APPOINTMENT DATE</label><br>
-	                            <label>{{responseData.earliestTime}}</label><br>
-	                            <br>
+	                        	<label>Patient</label>
+	                        	 <div class="dataTable_wrapper">
+						            <table class="table table-striped table-bordered table-hover span12">
+						                <tbody>
+						                    <tr>
+						                        <td>Hospital number</td>
+						                        <td>{{responseData.patient.hospital_number}}</td>
+						                    </tr>
+						                    <tr>
+						                        <td>Name</td>
+						                        <td>{{responseData.patient.name}}</td>
+						                    </tr>
+						                    <tr>
+						                        <td>Lastname</td>
+						                        <td>{{responseData.patient.lastname}}</td>
+						                    </tr>
+						                </tbody>
+						            </table>
+						        </div>
+	                        	
+	                        	<label>Doctor</label>
+	                        	 <div class="dataTable_wrapper">
+						            <table class="table table-striped table-bordered table-hover span12">
+						                <tbody>
+						                    <tr>
+						                        <td>Name</td>
+						                        <td>{{responseData.doctor.name}}</td>
+						                    </tr>
+						                    <tr>
+						                        <td>Lastname</td>
+						                        <td>{{responseData.doctor.lastname}}</td>
+						                    </tr>
+						                    <tr>
+						                        <td>Appointment date</td>
+						                        <td>{{responseData.earliestTime}}</td>
+						                    </tr>
+						                </tbody>
+						            </table>
+						        </div>
 	                            <button type="button" class="btn btn-primary btn-lg btn-block" ng-click="confirmData.changeDate()">
 	                                CHANGE APPOINTMENT DATE
 	                            </button>

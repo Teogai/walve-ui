@@ -15,7 +15,9 @@ angular.module('walveApp')
       replace: true,
       scope: {
       },
-      controller:function($scope){
+      controller: ["$scope", "$rootScope", function($scope, $rootScope) {
+        $scope.global = $rootScope.global;
+
         $scope.selectedMenu = 'dashboard';
         $scope.collapseVar = 0;
         $scope.multiCollapseVar = 0;
@@ -35,6 +37,6 @@ angular.module('walveApp')
           else
             $scope.multiCollapseVar = y;
         };
-      }
-    }
+      }]
+    };
   }]);
