@@ -48,7 +48,13 @@ angular.module('walveApp')
   	$scope.showCalendar = false;
 
   	$scope.makeData = [];
+  	$scope.makeData.disableNumber = false;
   	$scope.makeData.number = '';
+  	if($scope.global.user.type == 'patient'){
+  		$scope.makeData.disableNumber = true;
+  		$scope.makeData.number = $scope.global.user.data.hospital_number;
+  	}
+
   	$scope.makeData.types = [{
 	  	id: 1,
 	  	label: 'Department',
