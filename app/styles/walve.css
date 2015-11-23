@@ -47,6 +47,15 @@ body {
     overflow: hidden; 
 }
 
+
+.treatment-table td input { 
+    background-color: transparent;
+    text-align: right;
+    border: 0;
+    width: 100%;
+    margin-right: -110px;
+}
+
 a {
     color: #fff;
 }

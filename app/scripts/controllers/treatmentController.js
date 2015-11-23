@@ -8,23 +8,34 @@
  */
 angular.module('walveApp')
   .controller('TreatmentCtrl', function($scope, $http) {
-  	$scope.laravelURL = '../../public/';
-
   	$scope.findPatient = [];
   	$scope.findPatient.patientID = '';
+
+  	$scope.editBasicData = true;
   	$scope.basicData = [];
-  	$scope.basicData.weight = '';
   	$scope.basicData.height = '';
+  	$scope.basicData.weight = '';
+  	$scope.basicData.bloodType = '';
+  	$scope.basicData.pulseRate = '';
+  	$scope.basicData.bloodPressure = '';
   	$scope.basicData.temperature = '';
-  	$scope.basicData.heartRate = '';
-  	$scope.basicData.pressure = '';
+  	$scope.basicData.symptom = '';
+  	$scope.basicData.duration = '';
+  	$scope.basicData.drugAllergy = '';
+
+	$scope.editDiagnose = false;
+  	$scope.diagnose = [];
+  	$scope.diagnose.icd10 = '';
+  	$scope.diagnose.method = '';
+  	$scope.diagnose.medicineList = '';
+  	$scope.diagnose.detail = '';
 	
 	//---------------------------------------Input to find Patient-----------------------------------//
    	
    	$scope.findPatient.submit = function(){
   		$http({
   			method: 'POST',
-			url: $scope.laravelURL + 'treatment',
+			url: $scope.global.laravelURL + 'treatment',
 			headers: {
 			'Content-Type': 'application/json'
 			},
@@ -40,12 +51,13 @@ angular.module('walveApp')
 		  });
   		};
 
-
   	//---------------------------------------Add patient's basic data-----------------------------------------------//
   	$scope.basicData.submit = function(){
+  		$scope.editBasicData = false;
+  		$scope.editDiagnose = true;
   		$http({
   			method: 'POST',
-			url: $scope.laravelURL + 'treatment2',
+			url: $scope.global.laravelURL + 'treatment2',
 			headers: {
 			'Content-Type': 'application/json'
 			},

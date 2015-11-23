@@ -35,7 +35,7 @@ angular.module('walveApp')
 		]
 	}, {
 	  id: 2,
-	  label: 'Doctors',
+	  label: 'Doctor',
 	  details: [
 	  		{
 	  			id: 1,
