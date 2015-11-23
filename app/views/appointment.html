@@ -26,16 +26,16 @@
 	                                </select>
 	                            </div>
 	                            <div class="form-group" ng-show="makeData.selectedType.label=='Department'">
-	                                <label>Department</label>
+	                                <label>{{makeData.selectedType.label}}</label>
 	                                <select class="form-control" 
-	                                		ng-model="makeData.selectedTypeDetail"
+	                                		ng-model="makeData.selectedDepartment"
 	                                    	ng-options="detail as detail.department_name for detail in makeData.selectedType.details track by detail.id">
 	                                </select>
 	                            </div>
 	                            <div class="form-group" ng-show="makeData.selectedType.label=='Doctor'">
-	                                <label>Doctor</label>
+	                                <label>{{makeData.selectedType.label}}</label>
 	                                <select class="form-control" 
-	                                		ng-model="makeData.selectedTypeDetail"
+	                                		ng-model="makeData.selectedDoctor"
 	                                    	ng-options="detail as detail.name for detail in makeData.selectedType.details track by detail.id">
 	                                </select>
 	                            </div>
