@@ -77,6 +77,7 @@ angular.module('walveApp')
 	$scope.confirmData.date = [];
 
 	$scope.calendar = [];
+	$scope.calendar.hideHn = true;
 	
 	//---------------------------------------Input to find fastest date-----------------------------------//
    	
