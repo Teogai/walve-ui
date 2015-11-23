@@ -14,9 +14,9 @@ angular.module('walveApp')
       $scope.Math = window.Math;
       $scope.calendar = $scope.data;
       var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-      $scope.calendar.clicked = function () {
-        console.log('click tum mai, yung mai dai tum');
-      };
+      // $scope.calendar.clicked = function (i, j) {
+      //   console.log(i + ' ' + j);
+      // };
 
       $scope.calendar.previousMonth = function () {
         var d = $scope.calendar.curMon;

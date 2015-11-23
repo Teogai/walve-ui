@@ -196,6 +196,23 @@ angular.module('walveApp')
 			    // or server returns response with an error status.
 			  });
 	  	};
+
+	  	$scope.calendar.clicked = function (i, j) {
+	        if($scope.calendar.table[i][j] == null) {
+	        	var date = $scope.calendar.curMon;
+	        	date.setDate(date.getDate() + i);
+
+	        	var day = date.getDate();
+	  			var month = date.getMonth() + 1;
+	  			var year = date.getFullYear();
+
+	  			var fullDate = year + '-' + month + '-' + date;
+	  			var time = Math.floor(j/8+13) + ':' + isModable(j,8,2) ? "0" : "" + Math.floor(j%8*7+i%8/2) + ':' + isModable(j,2,1) ? "0" : "" + j%2*30;
+	  			console.log(fullDate + ' ' + time);
+	  			return fullDate + ' ' + time;
+	        }
+	    };
+
   		$scope.calendar.refreshTable($scope.confirmData.earliestTime);
   		$scope.showCalendar = true;
   		$scope.showConfirm = false;
