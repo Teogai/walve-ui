@@ -2,11 +2,11 @@
 <div class="row">
     <div class="col-lg-12 text-center">
         <h1 style="margin-top: -5px;">
-        <button class="btn btn-default btn-circle btn-xl"><i class="fa fa-angle-double-left"></button>
-        <button class="btn btn-default btn-circle btn-xl"><i class="fa fa-angle-left"></button>
-        {{calendar.month}}
-        <button class="btn btn-default btn-circle btn-xl"><i class="fa fa-angle-right"></button>
-        <button class="btn btn-default btn-circle btn-xl"><i class="fa fa-angle-double-right"></button>
+        <button class="btn btn-default btn-circle btn-xl"><i class="fa fa-angle-double-left" ng-click="previousMonth()"></button>
+        <button class="btn btn-default btn-circle btn-xl"><i class="fa fa-angle-left" ng-click="previousWeek()"></button>
+        {{calendar.month}} {{calendar.year}}
+        <button class="btn btn-default btn-circle btn-xl"><i class="fa fa-angle-right" ng-click="nextWeek()"></button>
+        <button class="btn btn-default btn-circle btn-xl"><i class="fa fa-angle-double-right" ng-click="nextMonth()"></button>
         </h1>
     </div>
 </div>
@@ -18,11 +18,11 @@
                 <thead>
                     <tr>
                         <th>TIME</th>
-                        <th>MON 23</th>
-                        <th>TUE 24</th>
-                        <th>WED 25</th>
-                        <th>THU 26</th>
-                        <th>FRI 27</th>
+                        <th>MON {{calendar.mon}}</th>
+                        <th>TUE {{calendar.tue}}</th>
+                        <th>WED {{calendar.wed}}</th>
+                        <th>THU {{calendar.thu}}</th>
+                        <th>FRI {{calendar.fri}}</th>
                     </tr>
                 </thead>
                 <tbody>
