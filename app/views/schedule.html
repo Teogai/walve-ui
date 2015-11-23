@@ -6,7 +6,7 @@
 		<!-- /.col-lg-12 -->
 	</div>
 	<!-- /.row -->
-	<div class="row">
+	<div class="row" ng-hide="showMenu">
 		<div class="panel panel-default">
 			<div class="panel-body">
                 <div class="row">
@@ -33,5 +33,28 @@
 			</div>
 		</div>
 	</div>
-	<calendar data="calendar"></calendar>
+
+	<calendar data="calendar" ng-hide="showMenu"></calendar>
+
+	<div class="row" ng-show="showMenu">
+		<div class="col-lg-6 col-centered">
+			<div class="panel panel-default">
+				<div class="panel-body">
+	                <div class="row">
+	                    <div class="col-lg-12 ">
+	                        <button type="button" class="btn btn-outline btn-primary btn-lg btn-block" ng-click="">
+	                            ADD A SCHEDULE
+	                        </button>
+	                        <button type="button" class="btn btn-outline btn-primary btn-lg btn-block" ng-click="">
+	                            POSTPONE THE SCHEDULE
+	                        </button>
+	                        <button type="button" class="btn btn-outline btn-primary btn-lg btn-block" ng-click="">
+	                            REMOVE THE SCHEDULE
+	                        </button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>

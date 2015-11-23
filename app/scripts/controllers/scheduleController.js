@@ -9,7 +9,7 @@
 angular.module('walveApp')
   .controller('ScheduleCtrl', function($scope, $http) {
   	$scope.laravelURL = '../../public/';
-
+  	$scope.showMenu = false;
 
    	function setTypes(){
   		$scope.makeData.types = [{
@@ -107,6 +107,10 @@ angular.module('walveApp')
 	    // called asynchronously if an error occurs
 	    // or server returns response with an error status.
 	  });
+  	};
+
+  	$scope.calendar.clicked = function (i, j) {
+  		$scope.showMenu = true;
   	};
 
   });
