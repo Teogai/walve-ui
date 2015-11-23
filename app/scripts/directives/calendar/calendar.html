@@ -26,13 +26,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="i in getNumber(number) track by $index" ng-click="calendar.clicked()">
+                    <tr ng-repeat="i in getNumber(number) track by $index">
                         <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td ng-repeat="j in getNumber(number2) track by $index" ng-click="calendar.clicked()">{{calendar.table[i][j]}}</td>
                     </tr>
                 </tbody>
             </table>

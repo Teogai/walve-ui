@@ -48,6 +48,15 @@ angular.module('walveApp')
         return new Date(d.setDate(diff));
       }
 
+      $scope.calendar.updateInsideTable = function(){      
+        for (var i = 0; i < $scope.number; i++) {
+            $scope.calendar.table[i] = [];
+          for (var j = 0; j < $scope.number2; j++) {
+            $scope.calendar.table[i][j] = Math.floor((Math.random() * 100) + 1);
+          };
+        };
+      }
+
       $scope.calendar.refreshTable = function(d) {
         curMon = $scope.calendar.getMonday(d);
         var curMonloop = new Date(curMon);
@@ -70,17 +79,28 @@ angular.module('walveApp')
           $scope.calendar.month = monthNames[curMon.getMonth()];
           if(curMonloop.getMonth()!=curMon.getMonth()) $scope.calendar.month += " - " + monthNames[curMonloop.getMonth()];
         } 
+        $scope.calendar.updateInsideTable();
       }
 
       var date = new Date($scope.calendar.wantDate);
       if($scope.calendar.wantDate == null) date = new Date();
       var curMon = date;
-      $scope.calendar.refreshTable(date);
+      $scope.calendar.table = [];
 
       $scope.number = 40;
+      $scope.number2 = 5;
       $scope.getNumber = function(num) {
-        return new Array(num);   
+        var x = new Array(num);
+        for (var i = 0; i < num; i++) {
+          x[i] = i;     
+        };
+        return x;
       }
+
+      $scope.calendar.refreshTable(date);
+
+      //------------------------------Preparation for database tableData---------------------------------------//
+      var db = []; //link here with callback from db; //Array of [Date][TimePeriod]
 
     }];
 
