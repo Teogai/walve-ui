@@ -9,10 +9,8 @@
 angular.module('walveApp')
   .controller('AppointmentCtrl', function($scope, $http) {
   	$scope.laravelURL = '';
-  	
-  	$scope.testFunc = function(){
-  		console.log('testFunc');
-  	};
+
+  	$scope.calendar = [];
 
   	$scope.showMake = true;
   	$scope.showConfirm = false;
@@ -105,9 +103,9 @@ angular.module('walveApp')
   	$scope.confirmData.changeDate = function(){
   		$scope.showCalendar = true;
   		$scope.showConfirm = false;
+  		// $scope.calendar.refreshTable("2016-12-23");
   	}
 
-  	$scope.calendar = [];
-  	$scope.calendar.month = 'November';
+  	
   	 
   });
