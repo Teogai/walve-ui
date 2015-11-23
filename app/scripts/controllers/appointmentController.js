@@ -24,7 +24,7 @@ angular.module('walveApp')
 		  });
   		};
 
-	$scope.getDepartmentList = function(){
+	$scope.getDoctorList = function(){
   		$http({
   			method: 'POST',
 			url: $scope.global.laravelURL + 'doctor/get',
@@ -39,6 +39,9 @@ angular.module('walveApp')
 		    // or server returns response with an error status.
 		  });
   		};
+
+  	$scope.getDepartmentList();
+  	$scope.getDoctorList();
 
   	$scope.showMake = true;
   	$scope.showConfirm = false;

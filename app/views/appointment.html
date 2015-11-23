@@ -81,18 +81,45 @@
 	                <div class="row">
 	                    <div class="col-lg-12 ">
 	                        <form role="form" ng-submit="confirmData.submit()">
-	                        	<label>PATIENT DATA</label><br>
-	                            <label>Hospital number: {{responseData.patient.hospital_number}}</label><br>
-	                            <label>Name: {{responseData.patient.name}}</label><br>
-	                            <label>Lastname: {{responseData.patient.lastname}}</label><br>
-	                            <br>
-	                            <label>DOCTOR DATA</label><br>
-	                            <label>Name: {{responseData.doctor.name}}</label><br>
-	                            <label>Lastname: {{responseData.doctor.lastname}}</label><br>
-	                            <br>
-	                            <label>APPOINTMENT DATE</label><br>
-	                            <label>{{responseData.earliestTime}}</label><br>
-	                            <br>
+	                        	<label>Patient</label>
+	                        	 <div class="dataTable_wrapper">
+						            <table class="table table-striped table-bordered table-hover span12">
+						                <tbody>
+						                    <tr>
+						                        <td>Hospital number</td>
+						                        <td>{{responseData.patient.hospital_number}}</td>
+						                    </tr>
+						                    <tr>
+						                        <td>Name</td>
+						                        <td>{{responseData.patient.name}}</td>
+						                    </tr>
+						                    <tr>
+						                        <td>Lastname</td>
+						                        <td>{{responseData.patient.lastname}}</td>
+						                    </tr>
+						                </tbody>
+						            </table>
+						        </div>
+	                        	
+	                        	<label>Doctor</label>
+	                        	 <div class="dataTable_wrapper">
+						            <table class="table table-striped table-bordered table-hover span12">
+						                <tbody>
+						                    <tr>
+						                        <td>Name</td>
+						                        <td>{{responseData.doctor.name}}</td>
+						                    </tr>
+						                    <tr>
+						                        <td>Lastname</td>
+						                        <td>{{responseData.doctor.lastname}}</td>
+						                    </tr>
+						                    <tr>
+						                        <td>Appointment date</td>
+						                        <td>{{responseData.earliestTime}}</td>
+						                    </tr>
+						                </tbody>
+						            </table>
+						        </div>
 	                            <button type="button" class="btn btn-primary btn-lg btn-block" ng-click="confirmData.changeDate()">
 	                                CHANGE APPOINTMENT DATE
 	                            </button>
