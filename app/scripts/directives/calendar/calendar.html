@@ -34,11 +34,11 @@
                 <tbody>
                     <tr ng-repeat="i in getNumber(number) track by $index">
                         <td>{{isLessthan(i,8) ? "0" : ""}}{{Math.floor(i/8+9)}}:{{isModable(i,8,2) ? "0" : ""}}{{Math.floor(i%8*7+i%8/2)}}:{{isModable(i,2,1) ? "0" : ""}}{{i%2*30}}</td>
-                        <td ng-repeat="j in getNumber(number2) track by $index" ng-click="calendar.clicked(j, i)">{{calendar.table[j][i]}}</td>
+                        <td ng-repeat="j in getNumber(number2) track by $index" ng-click="calendar.clicked(j, i)">{{calendar.table[j][i].hospital_number}}</td>
                     </tr>
                     <tr ng-repeat="i in getNumber(number) track by $index">
                         <td>{{Math.floor(i/8+13)}}:{{isModable(i,8,2) ? "0" : ""}}{{Math.floor(i%8*7+i%8/2)}}:{{isModable(i,2,1) ? "0" : ""}}{{i%2*30}}</td>
-                        <td ng-repeat="j in getNumber(number2) track by $index" ng-click="calendar.clicked(j, i)">{{calendar.table[i+20][j]}}</td>
+                        <td ng-repeat="j in getNumber(number2) track by $index" ng-click="calendar.clicked(j, i)">{{calendar.table[i+20][j].hospital_number}}</td>
                     </tr>
                 </tbody>
             </table>

@@ -123,51 +123,18 @@ angular.module('walveApp')
   		};
 
   	function fillTableData(data){
-		for (var i = 0; i < data.mon.length; i++) {
-			if(data.mon[i].schedule_id != i + 1) {
-				var n = data.mon[i].schedule_id - i
-				for (var j = 0; j < n ; j++) {
-					data.mon.splice(i,0,null);
-					i++;
+  		for (var k = 0; k < data.length; k++) {
+  			for (var i = 0; i < data[k].length; i++) {
+				if(data[k][i].schedule_id != i + 1) {
+					var n = data[k][i].schedule_id - i
+					for (var j = 0; j < n ; j++) {
+						data[k].splice(i,0,null);
+						i++;
+					}
 				}
 			}
-		}
-		for (var i = 0; i < data.tue.length; i++) {
-			if(data.tue[i].schedule_id != i + 1) {
-				var n = data.tue[i].schedule_id - i
-				for (var j = 0; j < n ; j++) {
-					data.tue.splice(i,0,null);
-					i++;
-				}
-			}
-		}
-		for (var i = 0; i < data.wed.length; i++) {
-			if(data.wed[i].schedule_id != i + 1) {
-				var n = data.wed[i].schedule_id - i
-				for (var j = 0; j < n ; j++) {
-					data.wed.splice(i,0,null);
-					i++;
-				}
-			}
-		}
-		for (var i = 0; i < data.thu.length; i++) {
-			if(data.thu[i].schedule_id != i + 1) {
-				var n = data.thu[i].schedule_id - i
-				for (var j = 0; j < n ; j++) {
-					data.thu.splice(i,0,null);
-					i++;
-				}
-			}
-		}
-		for (var i = 0; i < data.fri.length; i++) {
-			if(data.fri[i].schedule_id != i + 1) {
-				var n = data.fri[i].schedule_id - i
-				for (var j = 0; j < n ; j++) {
-					data.fri.splice(i,0,null);
-					i++;
-				}
-			}
-		}
+  		};
+		
 		return data;
 	};
 
@@ -198,18 +165,18 @@ angular.module('walveApp')
 	  	};
 
 	  	$scope.calendar.clicked = function (i, j) {
-	        if($scope.calendar.table[i][j] == null) {
-	        	var date = $scope.calendar.curMon;
+	        if($scope.calendar.table[i] == null || $scope.calendar.table[i][j] == null) {
+	        	var date = angular.copy($scope.calendar.curMon);
 	        	date.setDate(date.getDate() + i);
 
 	        	var day = date.getDate();
 	  			var month = date.getMonth() + 1;
 	  			var year = date.getFullYear();
 
-	  			var fullDate = year + '-' + month + '-' + date;
-	  			var time = Math.floor(j/8+13) + ':' + isModable(j,8,2) ? "0" : "" + Math.floor(j%8*7+i%8/2) + ':' + isModable(j,2,1) ? "0" : "" + j%2*30;
-	  			console.log(fullDate + ' ' + time);
-	  			return fullDate + ' ' + time;
+	  			var fullDate = year + '-' + month + '-' + day;
+	  			//var time = Math.floor(j/8+13) + ':' + isModable(j,8,2) ? "0" : "" + Math.floor(j%8*7+i%8/2) + ':' + isModable(j,2,1) ? "0" : "" + j%2*30;
+	  			console.log(fullDate);
+	  			return fullDate;
 	        }
 	    };
 
