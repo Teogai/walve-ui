@@ -54,17 +54,22 @@ angular.module('walveApp')
 		  });
   		};
 
-  	
+  	$scope.calendar = [];
 
   	$scope.showMake = true;
   	$scope.showConfirm = false;
   	$scope.showCalendar = false;
+  	$scope.showComplete = false;
 
   	$scope.makeData = [];
   	$scope.makeData.disableNumber = false;
   	$scope.makeData.number = '';
   	if($scope.global.user.type == 'patient'){
   		$scope.makeData.number = $scope.global.user.data.hospital_number;
+  		$scope.calendar.hideHn = true;
+  	}
+  	else{
+  		$scope.calendar.hideHn = false;
   	}
 
 	$scope.getDepartmentList();
@@ -75,9 +80,7 @@ angular.module('walveApp')
 
 	$scope.confirmData = [];
 	$scope.confirmData.date = [];
-
-	$scope.calendar = [];
-	$scope.calendar.hideHn = false;
+	
 	
 	//---------------------------------------Input to find fastest date-----------------------------------//
    	
@@ -110,7 +113,6 @@ angular.module('walveApp')
 
   	//---------------------------------------Choose Date-----------------------------------------------//
   	$scope.confirmData.submit = function(){
-  		console.log('ok');
   		$http({
   			method: 'POST',
 			url: $scope.global.laravelURL + 'appointment/confirm',
@@ -123,7 +125,8 @@ angular.module('walveApp')
 				earliestTime: $scope.confirmData.earliestTime,
 			}
 		}).then(function successCallback(response) {
-			$scope.responseData = response.data;
+			$scope.showConfirm = false;
+			$scope.showComplete = true;
 		  }, function errorCallback(response) {
 		    // called asynchronously if an error occurs
 		    // or server returns response with an error status.
@@ -173,7 +176,7 @@ angular.module('walveApp')
 	  	};
 
 	  	$scope.calendar.clicked = function (i, j) {
-	        if($scope.calendar.table[i].hospital_number == null) {
+	        if($scope.calendar.table[i][j].hospital_number==null) {
 	        	var date = angular.copy($scope.calendar.curMon);
 	        	date.setDate(date.getDate() + i);
 
