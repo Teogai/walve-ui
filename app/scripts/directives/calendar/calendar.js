@@ -77,7 +77,7 @@ angular.module('walveApp')
       var curMon = date;
       $scope.calendar.refreshTable(date);
 
-      $scope.number = 20;
+      $scope.number = 40;
       $scope.getNumber = function(num) {
         return new Array(num);   
       }
