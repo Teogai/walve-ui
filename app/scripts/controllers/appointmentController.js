@@ -126,6 +126,25 @@ angular.module('walveApp')
   		$scope.calendar.refreshTable($scope.confirmData.earliestTime);
   		$scope.showCalendar = true;
   		$scope.showConfirm = false;
-  	}
+  	};
   	 
+  	$scope.calendar.updateInsideTable = function(){  
+  		$http({
+  			method: 'POST',
+			url: $scope.global.laravelURL + 'appointment/getData',
+			headers: {
+			'Content-Type': 'application/json'
+			},
+			data: {
+				selectedDoctor: $scope.confirmData.doctor,
+				date: $scope.confirmData.earliestTime
+			}
+		}).then(function successCallback(response) {
+			$scope.calendar.table = response.data;
+		  }, function errorCallback(response) {
+		    // called asynchronously if an error occurs
+		    // or server returns response with an error status.
+		  });
+  	};
+
   });

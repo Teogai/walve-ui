@@ -48,14 +48,14 @@ angular.module('walveApp')
         return new Date(d.setDate(diff));
       }
 
-      $scope.calendar.updateInsideTable = function(){      
-        for (var i = 0; i < $scope.number; i++) {
-            $scope.calendar.table[i] = [];
-          for (var j = 0; j < $scope.number2; j++) {
-            $scope.calendar.table[i][j] = Math.floor((Math.random() * 100) + 1);
-          };
-        };
-      }
+      // $scope.calendar.updateInsideTable = function(){      
+      //   for (var i = 0; i < $scope.number; i++) {
+      //       $scope.calendar.table[i] = [];
+      //     for (var j = 0; j < $scope.number2; j++) {
+      //       $scope.calendar.table[i][j] = Math.floor((Math.random() * 100) + 1);
+      //     };
+      //   };
+      // }
 
       $scope.calendar.refreshTable = function(d) {
         curMon = $scope.calendar.getMonday(d);
