@@ -25,11 +25,18 @@
 	                                    	ng-options="type as type.label for type in makeData.types track by type.id">
 	                                </select>
 	                            </div>
-	                            <div class="form-group" ng-hide="makeData.selectedType.length==0">
-	                                <label>{{makeData.selectedType.label}}</label>
+	                            <div class="form-group" ng-show="makeData.selectedType.label=='Department'">
+	                                <label>Department</label>
 	                                <select class="form-control" 
 	                                		ng-model="makeData.selectedTypeDetail"
-	                                    	ng-options="detail as detail.label for detail in makeData.selectedType.details track by detail.id">
+	                                    	ng-options="detail as detail.department_name for detail in makeData.selectedType.details track by detail.id">
+	                                </select>
+	                            </div>
+	                            <div class="form-group" ng-show="makeData.selectedType.label=='Doctor'">
+	                                <label>Doctor</label>
+	                                <select class="form-control" 
+	                                		ng-model="makeData.selectedTypeDetail"
+	                                    	ng-options="detail as detail.name for detail in makeData.selectedType.details track by detail.id">
 	                                </select>
 	                            </div>
 	                            <button type="submit" class="btn btn-outline btn-primary btn-lg btn-block">

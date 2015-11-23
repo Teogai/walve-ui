@@ -8,11 +8,37 @@
  */
 angular.module('walveApp')
   .controller('AppointmentCtrl', function($scope, $http) {
-  	$scope.laravelURL = '';
-  	
-  	$scope.testFunc = function(){
-  		console.log('testFunc');
-  	};
+  	$scope.getDepartmentList = function(){
+  		$http({
+  			method: 'POST',
+			url: $scope.global.laravelURL + 'department/get',
+			headers: {
+			'Content-Type': 'application/json'
+			}
+		}).then(function successCallback(response) {
+			$scope.departmentList = response.data;
+		  	// console.log(response.data);
+		  }, function errorCallback(response) {
+		    // called asynchronously if an error occurs
+		    // or server returns response with an error status.
+		  });
+  		};
+
+	$scope.getDepartmentList = function(){
+  		$http({
+  			method: 'POST',
+			url: $scope.global.laravelURL + 'doctor/get',
+			headers: {
+			'Content-Type': 'application/json'
+			}
+		}).then(function successCallback(response) {
+			$scope.doctorList = response.data;
+		  	// console.log(response.data);
+		  }, function errorCallback(response) {
+		    // called asynchronously if an error occurs
+		    // or server returns response with an error status.
+		  });
+  		};
 
   	$scope.showMake = true;
   	$scope.showConfirm = false;
@@ -23,29 +49,11 @@ angular.module('walveApp')
   	$scope.makeData.types = [{
 	  	id: 1,
 	  	label: 'Department',
-	  	details: [
-	  		{
-	  			id: 1,
-	  			label: 'Department A',	
-	  		},
-	  		{
-	  			id: 2,
-	  			label: 'Department B',	
-	  		},
-		]
+	  	details: $scope.departmentList,
 	}, {
-	  id: 2,
-	  label: 'Doctor',
-	  details: [
-	  		{
-	  			id: 1,
-	  			label: 'Doctor A',	
-	  		},
-	  		{
-	  			id: 2,
-	  			label: 'Doctor B',	
-	  		},
-		]
+		id: 2,
+		label: 'Doctor',
+		details: $scope.doctorList,
 	}];
 	
 	$scope.makeData.selectedType = [];
@@ -59,7 +67,7 @@ angular.module('walveApp')
    	$scope.makeData.submit = function(){
   		$http({
   			method: 'POST',
-			url: $scope.laravelURL + 'appointment',
+			url: $scope.global.laravelURL + 'appointment',
 			headers: {
 			'Content-Type': 'application/json'
 			},
@@ -83,7 +91,7 @@ angular.module('walveApp')
   	$scope.confirmData.submit = function(){
   		$http({
   			method: 'POST',
-			url: $scope.laravelURL + 'appointment',
+			url: $scope.global.laravelURL + 'appointment',
 			headers: {
 			'Content-Type': 'application/json'
 			},
