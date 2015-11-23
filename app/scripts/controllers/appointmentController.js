@@ -54,17 +54,22 @@ angular.module('walveApp')
 		  });
   		};
 
-  	
+  	$scope.calendar = [];
 
   	$scope.showMake = true;
   	$scope.showConfirm = false;
   	$scope.showCalendar = false;
+  	$scope.showComplete = false;
 
   	$scope.makeData = [];
   	$scope.makeData.disableNumber = false;
   	$scope.makeData.number = '';
   	if($scope.global.user.type == 'patient'){
   		$scope.makeData.number = $scope.global.user.data.hospital_number;
+  		$scope.calendar.hideHn = true;
+  	}
+  	else{
+  		$scope.calendar.hideHn = false;
   	}
 
 	$scope.getDepartmentList();
@@ -75,8 +80,7 @@ angular.module('walveApp')
 
 	$scope.confirmData = [];
 	$scope.confirmData.date = [];
-
-	$scope.calendar = [];
+	
 	
 	//---------------------------------------Input to find fastest date-----------------------------------//
    	
@@ -97,7 +101,9 @@ angular.module('walveApp')
 			$scope.showMake = false;
 			$scope.showConfirm = true;
 			$scope.responseData = response.data;
-			$scope.confirmData = response.data;
+			$scope.confirmData.patient = response.data.patient;
+			$scope.confirmData.doctor = response.data.doctor;
+			$scope.confirmData.earliestTime = response.data.earliestTime;
 		  	// console.log(response.data);
 		  }, function errorCallback(response) {
 		    // called asynchronously if an error occurs
@@ -113,19 +119,98 @@ angular.module('walveApp')
 			headers: {
 			'Content-Type': 'application/json'
 			},
-			data: $scope.confirmData
+			data: {
+				patient: $scope.confirmData.patient,
+				doctor: $scope.confirmData.doctor,
+				earliestTime: $scope.confirmData.earliestTime,
+			}
 		}).then(function successCallback(response) {
-			$scope.responseData = response.data;
+			$scope.showConfirm = false;
+			$scope.showComplete = true;
 		  }, function errorCallback(response) {
 		    // called asynchronously if an error occurs
 		    // or server returns response with an error status.
 		  });
   		};
 
+  	function fillTableData(data){
+  		for (var k = 0; k < data.length; k++) {
+  			for (var i = 0; i < data[k].length; i++) {
+				if(data[k][i].schedule_id != i + 1) {
+					var n = data[k][i].schedule_id - i
+					for (var j = 0; j < n ; j++) {
+						data[k].splice(i,0,null);
+						i++;
+					}
+				}
+			}
+  		};
+		
+		return data;
+	};
+
   	$scope.changeDate = function(){
+  		$scope.calendar.updateInsideTable = function(){  
+  			var date = $scope.calendar.curMon.getDate();
+  			var month = $scope.calendar.curMon.getMonth() + 1;
+  			var year = $scope.calendar.curMon.getFullYear();
+
+  			var fullDate = year + '-' + month + '-' + date;
+
+	  		$http({
+	  			method: 'POST',
+				url: $scope.global.laravelURL + 'appointment/getcalendardata',
+				headers: {
+				'Content-Type': 'application/json'
+				},
+				data: {
+					selectedDoctor: $scope.confirmData.doctor,
+					date: fullDate
+				}
+			}).then(function successCallback(response) {
+				$scope.calendar.table = fillTableData(response.data);
+			  }, function errorCallback(response) {
+			    // called asynchronously if an error occurs
+			    // or server returns response with an error status.
+			  });
+	  	};
+
+	  	$scope.calendar.clicked = function (i, j) {
+	        if($scope.calendar.table[i][j].hospital_number==null) {
+	        	var date = angular.copy($scope.calendar.curMon);
+	        	date.setDate(date.getDate() + i);
+
+	        	var day = date.getDate();
+	  			var month = date.getMonth() + 1;
+	  			var year = date.getFullYear();
+
+	  			var fullDate = year + '-' + month + '-' + day;
+
+		  		$http({
+		  			method: 'POST',
+					url: $scope.global.laravelURL + 'schedule/gettime',
+					headers: {
+					'Content-Type': 'application/json'
+					},
+					data: {
+						schedule_id: j + 1
+					}
+				}).then(function successCallback(response) {
+					$scope.confirmData.earliestTime = fullDate + ' ' + response.data;
+					$scope.showCalendar = false;
+  					$scope.showConfirm = true;
+				  }, function errorCallback(response) {
+				    // called asynchronously if an error occurs
+				    // or server returns response with an error status.
+				  });
+	        }
+	    };
+
   		$scope.calendar.refreshTable($scope.confirmData.earliestTime);
   		$scope.showCalendar = true;
   		$scope.showConfirm = false;
-  	}
+  	};
   	 
+  	$scope.calendar.updateInsideTable = function(){  };
+
   });
