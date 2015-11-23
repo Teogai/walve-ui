@@ -34,7 +34,11 @@
                 <tbody>
                     <tr ng-repeat="i in getNumber(number) track by $index">
                         <td></td>
-                        <td ng-repeat="j in getNumber(number2) track by $index" ng-click="calendar.clicked()">{{calendar.table[i][j]}}</td>
+                        <td ng-click="calendar.clicked()">{{calendar.table.mon[i].hospital_number}}</td>
+                        <td ng-click="calendar.clicked()">{{calendar.table.tue[i].hospital_number}}</td>
+                        <td ng-click="calendar.clicked()">{{calendar.table.wed[i].hospital_number}}</td>
+                        <td ng-click="calendar.clicked()">{{calendar.table.thu[i].hospital_number}}</td>
+                        <td ng-click="calendar.clicked()">{{calendar.table.fri[i].hospital_number}}</td>
                     </tr>
                 </tbody>
             </table>

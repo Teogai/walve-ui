@@ -123,28 +123,35 @@ angular.module('walveApp')
   		};
 
   	$scope.changeDate = function(){
+  		$scope.calendar.updateInsideTable = function(){  
+  			var date = $scope.calendar.curMon.getDate();
+  			var month = $scope.calendar.curMon.getMonth();
+  			var year = $scope.calendar.curMon.getFullYear();
+
+  			var fullDate = year + '-' + month + '-' + date;
+
+	  		$http({
+	  			method: 'POST',
+				url: $scope.global.laravelURL + 'appointment/getdata',
+				headers: {
+				'Content-Type': 'application/json'
+				},
+				data: {
+					selectedDoctor: $scope.confirmData.doctor,
+					date: fullDate
+				}
+			}).then(function successCallback(response) {
+				$scope.calendar.table = response.data;
+			  }, function errorCallback(response) {
+			    // called asynchronously if an error occurs
+			    // or server returns response with an error status.
+			  });
+	  	};
   		$scope.calendar.refreshTable($scope.confirmData.earliestTime);
   		$scope.showCalendar = true;
   		$scope.showConfirm = false;
   	};
   	 
-  	$scope.calendar.updateInsideTable = function(){  
-  		$http({
-  			method: 'POST',
-			url: $scope.global.laravelURL + 'appointment/getData',
-			headers: {
-			'Content-Type': 'application/json'
-			},
-			data: {
-				selectedDoctor: $scope.confirmData.doctor,
-				date: $scope.confirmData.earliestTime
-			}
-		}).then(function successCallback(response) {
-			$scope.calendar.table = response.data;
-		  }, function errorCallback(response) {
-		    // called asynchronously if an error occurs
-		    // or server returns response with an error status.
-		  });
-  	};
+  	$scope.calendar.updateInsideTable = function(){  };
 
   });

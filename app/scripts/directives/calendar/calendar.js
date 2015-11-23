@@ -18,25 +18,25 @@ angular.module('walveApp')
       };
 
       $scope.calendar.previousMonth = function () {
-        var d = curMon;
+        var d = $scope.calendar.curMon;
         d.setDate(d.getDate() - 28);
         $scope.calendar.refreshTable(d);
       };
 
       $scope.calendar.previousWeek = function () {
-        var d = curMon;
+        var d = $scope.calendar.curMon;
         d.setDate(d.getDate() - 7);
         $scope.calendar.refreshTable(d);
       };
 
       $scope.calendar.nextWeek = function () {
-        var d = curMon;
+        var d = $scope.calendar.curMon;
         d.setDate(d.getDate() + 7);
         $scope.calendar.refreshTable(d);
       };
 
       $scope.calendar.nextMonth = function () {
-        var d = curMon;
+        var d = $scope.calendar.curMon;
         d.setDate(d.getDate() + 28);
         $scope.calendar.refreshTable(d);
       };
@@ -58,8 +58,8 @@ angular.module('walveApp')
       // }
 
       $scope.calendar.refreshTable = function(d) {
-        curMon = $scope.calendar.getMonday(d);
-        var curMonloop = new Date(curMon);
+        $scope.calendar.curMon = $scope.calendar.getMonday(d);
+        var curMonloop = new Date($scope.calendar.curMon);
 
         $scope.calendar.mon = curMonloop.getDate(); 
         curMonloop.setDate(curMonloop.getDate() + 1);
@@ -71,20 +71,20 @@ angular.module('walveApp')
         curMonloop.setDate(curMonloop.getDate() + 1);
         $scope.calendar.fri = curMonloop.getDate();
 
-        $scope.calendar.year = curMon.getFullYear();
-        if(curMonloop.getFullYear()!=curMon.getFullYear()) {
-          $scope.calendar.month = monthNames[curMon.getMonth()] + " " + $scope.calendar.year + " -";
+        $scope.calendar.year = $scope.calendar.curMon.getFullYear();
+        if(curMonloop.getFullYear()!=$scope.calendar.curMon.getFullYear()) {
+          $scope.calendar.month = monthNames[$scope.calendar.curMon.getMonth()] + " " + $scope.calendar.year + " -";
           $scope.calendar.year = monthNames[curMonloop.getMonth()] + " " + curMonloop.getFullYear();
         } else {
-          $scope.calendar.month = monthNames[curMon.getMonth()];
-          if(curMonloop.getMonth()!=curMon.getMonth()) $scope.calendar.month += " - " + monthNames[curMonloop.getMonth()];
+          $scope.calendar.month = monthNames[$scope.calendar.curMon.getMonth()];
+          if(curMonloop.getMonth()!=$scope.calendar.curMon.getMonth()) $scope.calendar.month += " - " + monthNames[curMonloop.getMonth()];
         } 
         $scope.calendar.updateInsideTable();
       }
 
       var date = new Date($scope.calendar.wantDate);
       if($scope.calendar.wantDate == null) date = new Date();
-      var curMon = date;
+      $scope.calendar.curMon = date;
       $scope.calendar.table = [];
 
       $scope.number = 40;
