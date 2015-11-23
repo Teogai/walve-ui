@@ -77,7 +77,7 @@ angular.module('walveApp')
 	$scope.confirmData.date = [];
 
 	$scope.calendar = [];
-	$scope.calendar.hideHn = true;
+	$scope.calendar.hideHn = false;
 	
 	//---------------------------------------Input to find fastest date-----------------------------------//
    	
@@ -156,7 +156,7 @@ angular.module('walveApp')
 
 	  		$http({
 	  			method: 'POST',
-				url: $scope.global.laravelURL + 'appointment/getdata',
+				url: $scope.global.laravelURL + 'appointment/getcalendardata',
 				headers: {
 				'Content-Type': 'application/json'
 				},
@@ -173,7 +173,7 @@ angular.module('walveApp')
 	  	};
 
 	  	$scope.calendar.clicked = function (i, j) {
-	        if($scope.calendar.table[i] == null || $scope.calendar.table[i][j] == null) {
+	        if($scope.calendar.table[i].hospital_number == null) {
 	        	var date = angular.copy($scope.calendar.curMon);
 	        	date.setDate(date.getDate() + i);
 
