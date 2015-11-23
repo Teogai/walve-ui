@@ -97,7 +97,9 @@ angular.module('walveApp')
 			$scope.showMake = false;
 			$scope.showConfirm = true;
 			$scope.responseData = response.data;
-			$scope.confirmData = response.data;
+			$scope.confirmData.patient = response.data.patient;
+			$scope.confirmData.doctor = response.data.doctor;
+			$scope.confirmData.earliestTime = response.data.earliestTime;
 		  	// console.log(response.data);
 		  }, function errorCallback(response) {
 		    // called asynchronously if an error occurs
@@ -107,13 +109,18 @@ angular.module('walveApp')
 
   	//---------------------------------------Choose Date-----------------------------------------------//
   	$scope.confirmData.submit = function(){
+  		console.log('ok');
   		$http({
   			method: 'POST',
 			url: $scope.global.laravelURL + 'appointment/confirm',
 			headers: {
 			'Content-Type': 'application/json'
 			},
-			data: $scope.confirmData
+			data: {
+				patient: $scope.confirmData.patient,
+				doctor: $scope.confirmData.doctor,
+				earliestTime: $scope.confirmData.earliestTime,
+			}
 		}).then(function successCallback(response) {
 			$scope.responseData = response.data;
 		  }, function errorCallback(response) {
@@ -174,9 +181,24 @@ angular.module('walveApp')
 	  			var year = date.getFullYear();
 
 	  			var fullDate = year + '-' + month + '-' + day;
-	  			//var time = Math.floor(j/8+13) + ':' + isModable(j,8,2) ? "0" : "" + Math.floor(j%8*7+i%8/2) + ':' + isModable(j,2,1) ? "0" : "" + j%2*30;
-	  			console.log(fullDate);
-	  			return fullDate;
+
+		  		$http({
+		  			method: 'POST',
+					url: $scope.global.laravelURL + 'schedule/gettime',
+					headers: {
+					'Content-Type': 'application/json'
+					},
+					data: {
+						schedule_id: j + 1
+					}
+				}).then(function successCallback(response) {
+					$scope.confirmData.earliestTime = fullDate + ' ' + response.data;
+					$scope.showCalendar = false;
+  					$scope.showConfirm = true;
+				  }, function errorCallback(response) {
+				    // called asynchronously if an error occurs
+				    // or server returns response with an error status.
+				  });
 	        }
 	    };
 
