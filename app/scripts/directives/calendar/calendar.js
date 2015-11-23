@@ -11,6 +11,7 @@ angular.module('walveApp')
 
     var controller = ['$scope', function($scope) {
 
+      $scope.Math = window.Math;
       $scope.calendar = $scope.data;
       var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
       $scope.calendar.clicked = function () {
@@ -49,7 +50,7 @@ angular.module('walveApp')
       }
 
       $scope.calendar.updateInsideTable = function(){      
-        for (var i = 0; i < $scope.number; i++) {
+        for (var i = 0; i < $scope.number*2; i++) {
             $scope.calendar.table[i] = [];
           for (var j = 0; j < $scope.number2; j++) {
             $scope.calendar.table[i][j] = Math.floor((Math.random() * 100) + 1);
@@ -87,7 +88,7 @@ angular.module('walveApp')
       var curMon = date;
       $scope.calendar.table = [];
 
-      $scope.number = 40;
+      $scope.number = 20;
       $scope.number2 = 5;
       $scope.getNumber = function(num) {
         var x = new Array(num);
@@ -95,6 +96,16 @@ angular.module('walveApp')
           x[i] = i;     
         };
         return x;
+      }
+
+      $scope.isLessthan = function(num,num2) {
+        return num < num2;
+      }
+
+      $scope.isModable = function(num,num2,num3) {
+        console.log(num%num2);
+        console.log(num3);
+        return num%num2 < num3;
       }
 
       $scope.calendar.refreshTable(date);
