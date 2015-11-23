@@ -67,12 +67,19 @@ angular.module('walveApp')
 
 	$scope.getDepartmentList();
 
+	$scope.currentDate = [];
+	$scope.currentScheduleId = [];
+
+	$scope.newDate = [];
+	$scope.newScheduleId = [];
+
+	$scope.isPostponing = false; 
 	//---------------------------------------Choose date to add-----------------------------------//
    	function fillTableData(data){
   		for (var k = 0; k < data.length; k++) {
   			for (var i = 0; i < data[k].length; i++) {
 				if(data[k][i].schedule_id != i + 1) {
-					var n = data[k][i].schedule_id - i
+					var n = data[k][i].schedule_id - i - 1;
 					for (var j = 0; j < n ; j++) {
 						data[k].splice(i,0,null);
 						i++;
@@ -109,8 +116,110 @@ angular.module('walveApp')
 	  });
   	};
 
-  	$scope.calendar.clicked = function (i, j) {
-  		$scope.showMenu = true;
-  	};
 
+  	$scope.addSchedule = function(){
+  		$http({
+  			method: 'POST',
+			url: $scope.global.laravelURL + 'schedule/create',
+			headers: {
+			'Content-Type': 'application/json'
+			},
+			data: {
+				create: {
+					staff_id: $scope.selectedDoctor.staff_id,
+					schedule_id: $scope.currentScheduleId,
+					date: $scope.currentDate,
+				}
+			}
+		}).then(function successCallback(response) {
+				$scope.showMenu = false;
+				$scope.calendar.refreshTable($scope.calendar.curMon);
+		  }, function errorCallback(response) {
+		    // called asynchronously if an error occurs
+		    // or server returns response with an error status.
+		  });
+  		};
+
+	$scope.deleteSchedule = function(){
+  		$http({
+  			method: 'POST',
+			url: $scope.global.laravelURL + 'schedule/delete',
+			headers: {
+			'Content-Type': 'application/json'
+			},
+			data: {
+				delete: {
+					staff_id: $scope.selectedDoctor.staff_id,
+					schedule_id: $scope.currentScheduleId,
+					date: $scope.currentDate,
+				}
+			}
+		}).then(function successCallback(response) {
+				$scope.showMenu = false;
+				$scope.calendar.refreshTable($scope.calendar.curMon);
+		  }, function errorCallback(response) {
+		    // called asynchronously if an error occurs
+		    // or server returns response with an error status.
+		  });
+	};
+
+	$scope.postponeStart = function(){
+  		$scope.showMenu = false;
+  		$scope.isPostponing = true; 
+	};
+
+	$scope.postponeSchedule = function(){
+  		$http({
+  			method: 'POST',
+			url: $scope.global.laravelURL + 'schedule/postpone',
+			headers: {
+			'Content-Type': 'application/json'
+			},
+			data: {
+				create: {
+					staff_id: $scope.selectedDoctor.staff_id,
+					schedule_id: $scope.newScheduleId,
+					date: $scope.newDate,
+				},
+				delete: {
+					staff_id: $scope.selectedDoctor.staff_id,
+					schedule_id: $scope.currentScheduleId,
+					date: $scope.currentDate,
+				}
+			}
+		}).then(function successCallback(response) {
+				$scope.showMenu = false;
+				$scope.isPostponing = false; 
+				$scope.calendar.refreshTable($scope.calendar.curMon);
+		  }, function errorCallback(response) {
+		    // called asynchronously if an error occurs
+		    // or server returns response with an error status.
+		  });
+	};
+
+
+  	$scope.calendar.clicked = function (i, j) {
+  		var date = angular.copy($scope.calendar.curMon);
+    	date.setDate(date.getDate() + i);
+
+    	var day = date.getDate();
+		var month = date.getMonth() + 1;
+		var year = date.getFullYear();
+
+		var fullDate = year + '-' + month + '-' + day;
+
+		if($scope.isPostponing){
+			$scope.newDate = fullDate;
+			$scope.newScheduleId = j + 1;
+			if($scope.calendar.table[i][j]===undefined){
+				$scope.postponeSchedule();
+			}
+		}
+		else{
+			$scope.showMenu = true;
+			$scope.currentDate = fullDate;
+			$scope.currentScheduleId = j + 1;
+		}
+		
+  	};
   });

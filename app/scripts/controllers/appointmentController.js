@@ -137,7 +137,7 @@ angular.module('walveApp')
   		for (var k = 0; k < data.length; k++) {
   			for (var i = 0; i < data[k].length; i++) {
 				if(data[k][i].schedule_id != i + 1) {
-					var n = data[k][i].schedule_id - i
+					var n = data[k][i].schedule_id - i - 1;
 					for (var j = 0; j < n ; j++) {
 						data[k].splice(i,0,null);
 						i++;
