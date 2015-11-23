@@ -30,8 +30,7 @@ angular.module('walveApp')
 			}
 		}).then(function successCallback(response) {
 			$scope.departmentList = response.data;
-		  	setTypes();
-			//$scope.getDoctorList();
+			$scope.getDoctorList();
 		  	// console.log(response.data);
 		  }, function errorCallback(response) {
 		    // called asynchronously if an error occurs
@@ -69,11 +68,11 @@ angular.module('walveApp')
   		$scope.makeData.number = $scope.global.user.data.hospital_number;
   	}
 
+	$scope.getDepartmentList();
+
 	$scope.makeData.selectedType = [];
   	$scope.makeData.selectedDepartment = [];
   	$scope.makeData.selectedDoctor = [];
-
-	$scope.getDepartmentList();
 
 	$scope.confirmData = [];
 	$scope.confirmData.date = [];
