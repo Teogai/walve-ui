@@ -11,56 +11,45 @@ angular.module('walveApp')
 
     var controller = ['$scope', function($scope) {
 
-      var date = new Date();
-      var curMon = date;
-      var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-            
       $scope.calendar = $scope.data;
-
-      refreshTable(date);
-      
-      $scope.clicked = function () {
+      var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+      $scope.calendar.clicked = function () {
         console.log('click tum mai, yung mai dai tum');
       };
 
-      $scope.previousMonth = function () {
-        console.log('lastMonth');
+      $scope.calendar.previousMonth = function () {
         var d = curMon;
         d.setDate(d.getDate() - 28);
-        refreshTable(d);
+        $scope.calendar.refreshTable(d);
       };
 
-      $scope.previousWeek = function () {
-        console.log('lastWeek');
+      $scope.calendar.previousWeek = function () {
         var d = curMon;
         d.setDate(d.getDate() - 7);
-        refreshTable(d);
+        $scope.calendar.refreshTable(d);
       };
 
-      $scope.nextWeek = function () {
-        console.log('nextWeek');
+      $scope.calendar.nextWeek = function () {
         var d = curMon;
         d.setDate(d.getDate() + 7);
-        refreshTable(d);
+        $scope.calendar.refreshTable(d);
       };
 
-      $scope.nextMonth = function () {
-        console.log('nextMonth');
+      $scope.calendar.nextMonth = function () {
         var d = curMon;
         d.setDate(d.getDate() + 28);
-        refreshTable(d);
+        $scope.calendar.refreshTable(d);
       };
 
-      function getMonday(d) {
+      $scope.calendar.getMonday = function(d) {
         d = new Date(d);
         var day = d.getDay(),
         diff = d.getDate() - day + (day == 0 ? -6:1); // adjust when day is sunday
         return new Date(d.setDate(diff));
       }
 
-      function refreshTable(d) {
-        curMon = getMonday(d);
-        console.log(curMon);
+      $scope.calendar.refreshTable = function(d) {
+        curMon = $scope.calendar.getMonday(d);
         var curMonloop = new Date(curMon);
 
         $scope.calendar.mon = curMonloop.getDate(); 
@@ -73,8 +62,24 @@ angular.module('walveApp')
         curMonloop.setDate(curMonloop.getDate() + 1);
         $scope.calendar.fri = curMonloop.getDate();
 
-        $scope.calendar.month = monthNames[curMon.getMonth()];
         $scope.calendar.year = curMon.getFullYear();
+        if(curMonloop.getFullYear()!=curMon.getFullYear()) {
+          $scope.calendar.month = monthNames[curMon.getMonth()] + " " + $scope.calendar.year + " -";
+          $scope.calendar.year = monthNames[curMonloop.getMonth()] + " " + curMonloop.getFullYear();
+        } else {
+          $scope.calendar.month = monthNames[curMon.getMonth()];
+          if(curMonloop.getMonth()!=curMon.getMonth()) $scope.calendar.month += " - " + monthNames[curMonloop.getMonth()];
+        } 
+      }
+
+      var date = new Date($scope.calendar.wantDate);
+      if($scope.calendar.wantDate == null) date = new Date();
+      var curMon = date;
+      $scope.calendar.refreshTable(date);
+
+      $scope.number = 20;
+      $scope.getNumber = function(num) {
+        return new Array(num);   
       }
 
     }];

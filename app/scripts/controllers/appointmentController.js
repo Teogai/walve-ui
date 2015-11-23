@@ -8,6 +8,7 @@
  */
 angular.module('walveApp')
   .controller('AppointmentCtrl', function($scope, $http) {
+  	
   	$scope.getDepartmentList = function(){
   		$http({
   			method: 'POST',
@@ -122,9 +123,9 @@ angular.module('walveApp')
   	$scope.confirmData.changeDate = function(){
   		$scope.showCalendar = true;
   		$scope.showConfirm = false;
+  		// $scope.calendar.refreshTable("2016-12-23");
   	}
 
   	$scope.calendar = [];
-  	$scope.calendar.month = 'November';
   	 
   });

@@ -2,11 +2,11 @@
 <div class="row">
     <div class="col-lg-12 text-center">
         <h1 style="margin-top: -5px;">
-        <button class="btn btn-default btn-circle btn-xl"><i class="fa fa-angle-double-left" ng-click="previousMonth()"></button>
-        <button class="btn btn-default btn-circle btn-xl"><i class="fa fa-angle-left" ng-click="previousWeek()"></button>
+        <button class="btn btn-default btn-circle btn-xl" ng-click="calendar.previousMonth()"><i class="fa fa-angle-double-left"></button>
+        <button class="btn btn-default btn-circle btn-xl" ng-click="calendar.previousWeek()"><i class="fa fa-angle-left"></button>
         {{calendar.month}} {{calendar.year}}
-        <button class="btn btn-default btn-circle btn-xl"><i class="fa fa-angle-right" ng-click="nextWeek()"></button>
-        <button class="btn btn-default btn-circle btn-xl"><i class="fa fa-angle-double-right" ng-click="nextMonth()"></button>
+        <button class="btn btn-default btn-circle btn-xl" ng-click="calendar.nextWeek()"><i class="fa fa-angle-right"></button>
+        <button class="btn btn-default btn-circle btn-xl" ng-click="calendar.nextMonth()"><i class="fa fa-angle-double-right"></button>
         </h1>
     </div>
 </div>
@@ -26,96 +26,21 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="calendar-090000" ng-click="clicked()">
-                        <td>09:00:00</td>
-                        <td>Kamin</td>
+                    <tr ng-repeat="i in getNumber(number) track by $index" ng-click="clicked()">
                         <td></td>
                         <td></td>
                         <td></td>
                         <td></td>
-                    </tr>
-                    <tr class="calendar-090730">
-                        <td>09:07:30</td>
-                        <td>Karn</td>
                         <td></td>
                         <td></td>
-                        <td>Eakamon</td>
+                    </tr>
+                    <tr ng-repeat="i in getNumber(number) track by $index" ng-click="clicked()">
                         <td></td>
-                    </tr>
-                    <tr class="calendar-091500">
-                        <td>09:15:00</td><td><td><td><td><td>
-                    </tr>
-                    <tr class="calendar-091500">
-                        <td>09:15:00</td><td><td><td><td><td>
-                    </tr>
-                    <tr class="calendar-091500">
-                        <td>09:15:00</td><td><td><td><td><td>
-                    </tr>
-                    <tr class="calendar-091500">
-                        <td>09:15:00</td><td><td><td><td><td>
-                    </tr>
-                    <tr class="calendar-091500">
-                        <td>09:15:00</td><td><td><td><td><td>
-                    </tr>
-                    <tr class="calendar-091500">
-                        <td>09:15:00</td><td><td><td><td><td>
-                    </tr>
-                    <tr class="calendar-091500">
-                        <td>09:15:00</td><td><td><td><td><td>
-                    </tr>
-                    <tr class="calendar-091500">
-                        <td>09:15:00</td><td><td><td><td><td>
-                    </tr>
-                    <tr class="calendar-091500">
-                        <td>09:15:00</td><td><td><td><td><td>
-                    </tr>
-                    <tr class="calendar-091500">
-                        <td>09:15:00</td><td><td><td><td><td>
-                    </tr>
-                    <tr class="calendar-091500">
-                        <td>09:15:00</td><td><td><td><td><td>
-                    </tr>
-                    <tr class="calendar-091500">
-                        <td>09:15:00</td><td><td><td><td><td>
-                    </tr>
-                    <tr class="calendar-091500">
-                        <td>09:15:00</td><td><td><td><td><td>
-                    </tr>
-                    <tr class="calendar-091500">
-                        <td>09:15:00</td><td><td><td><td><td>
-                    </tr>
-                    <tr class="calendar-091500">
-                        <td>09:15:00</td><td><td><td><td><td>
-                    </tr>
-                    <tr class="calendar-091500">
-                        <td>09:15:00</td><td><td><td><td><td>
-                    </tr>
-                    <tr class="calendar-091500">
-                        <td>09:15:00</td><td><td><td><td><td>
-                    </tr>
-                    <tr class="calendar-091500">
-                        <td>09:15:00</td><td><td><td><td><td>
-                    </tr>
-                    <tr class="calendar-091500">
-                        <td>09:15:00</td><td><td><td><td><td>
-                    </tr>
-                    <tr class="calendar-091500">
-                        <td>09:15:00</td><td><td><td><td><td>
-                    </tr>
-                    <tr class="calendar-091500">
-                        <td>09:15:00</td><td><td><td><td><td>
-                    </tr>
-                    <tr class="calendar-091500">
-                        <td>09:15:00</td><td><td><td><td><td>
-                    </tr>
-                    <tr class="calendar-091500">
-                        <td>09:15:00</td><td><td><td><td><td>
-                    </tr>
-                    <tr class="calendar-091500">
-                        <td>09:15:00</td><td><td><td><td><td>
-                    </tr>
-                    <tr class="calendar-091500">
-                        <td>09:15:00</td><td><td><td><td><td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
                     </tr>
                 </tbody>
             </table>
