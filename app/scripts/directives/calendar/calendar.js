@@ -73,8 +73,19 @@ angular.module('walveApp')
         curMonloop.setDate(curMonloop.getDate() + 1);
         $scope.calendar.fri = curMonloop.getDate();
 
-        $scope.calendar.month = monthNames[curMon.getMonth()];
         $scope.calendar.year = curMon.getFullYear();
+        if(curMonloop.getFullYear()!=curMon.getFullYear()) {
+          $scope.calendar.month = monthNames[curMon.getMonth()] + " " + $scope.calendar.year + " -";
+          $scope.calendar.year = monthNames[curMonloop.getMonth()] + " " + curMonloop.getFullYear();
+        } else {
+          $scope.calendar.month = monthNames[curMon.getMonth()];
+          if(curMonloop.getMonth()!=curMon.getMonth()) $scope.calendar.month += " - " + monthNames[curMonloop.getMonth()];
+        } 
+      }
+
+      $scope.number = 20;
+      $scope.getNumber = function(num) {
+        return new Array(num);   
       }
 
     }];
