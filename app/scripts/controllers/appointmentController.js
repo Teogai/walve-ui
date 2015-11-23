@@ -122,10 +122,59 @@ angular.module('walveApp')
 		  });
   		};
 
+  	function fillTableData(data){
+		for (var i = 0; i < data.mon.length; i++) {
+			if(data.mon[i].schedule_id != i + 1) {
+				var n = data.mon[i].schedule_id - i
+				for (var j = 0; j < n ; j++) {
+					data.mon.splice(i,0,null);
+					i++;
+				}
+			}
+		}
+		for (var i = 0; i < data.tue.length; i++) {
+			if(data.tue[i].schedule_id != i + 1) {
+				var n = data.tue[i].schedule_id - i
+				for (var j = 0; j < n ; j++) {
+					data.tue.splice(i,0,null);
+					i++;
+				}
+			}
+		}
+		for (var i = 0; i < data.wed.length; i++) {
+			if(data.wed[i].schedule_id != i + 1) {
+				var n = data.wed[i].schedule_id - i
+				for (var j = 0; j < n ; j++) {
+					data.wed.splice(i,0,null);
+					i++;
+				}
+			}
+		}
+		for (var i = 0; i < data.thu.length; i++) {
+			if(data.thu[i].schedule_id != i + 1) {
+				var n = data.thu[i].schedule_id - i
+				for (var j = 0; j < n ; j++) {
+					data.thu.splice(i,0,null);
+					i++;
+				}
+			}
+		}
+		for (var i = 0; i < data.fri.length; i++) {
+			if(data.fri[i].schedule_id != i + 1) {
+				var n = data.fri[i].schedule_id - i
+				for (var j = 0; j < n ; j++) {
+					data.fri.splice(i,0,null);
+					i++;
+				}
+			}
+		}
+		return data;
+	};
+
   	$scope.changeDate = function(){
   		$scope.calendar.updateInsideTable = function(){  
   			var date = $scope.calendar.curMon.getDate();
-  			var month = $scope.calendar.curMon.getMonth();
+  			var month = $scope.calendar.curMon.getMonth() + 1;
   			var year = $scope.calendar.curMon.getFullYear();
 
   			var fullDate = year + '-' + month + '-' + date;
@@ -141,7 +190,7 @@ angular.module('walveApp')
 					date: fullDate
 				}
 			}).then(function successCallback(response) {
-				$scope.calendar.table = response.data;
+				$scope.calendar.table = fillTableData(response.data);
 			  }, function errorCallback(response) {
 			    // called asynchronously if an error occurs
 			    // or server returns response with an error status.
