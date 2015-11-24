@@ -37,23 +37,24 @@ angular.module('walveApp')
 	
 	//---------------------------------------Input to find Patient-----------------------------------//
    	
-   	$scope.findPatient.submit = function(){
-  		$http({
-  			method: 'POST',
-			url: $scope.global.laravelURL + 'treatment',
-			headers: {
-			'Content-Type': 'application/json'
-			},
-			data: { 
-				patientID : $scope.findPatient.patientID
-			}
-		}).then(function successCallback(response) {
-			$scope.responseData = response.data;
-		  	// console.log(response.data);
-		  }, function errorCallback(response) {
-		    // called asynchronously if an error occurs
-		    // or server returns response with an error status.
-		  });
+   	$scope.diagnose.submit = function(){
+   		$scope.showTreatment = false;
+  // 		$http({
+  // 			method: 'POST',
+		// 	url: $scope.global.laravelURL + 'treatment',
+		// 	headers: {
+		// 	'Content-Type': 'application/json'
+		// 	},
+		// 	data: { 
+		// 		patientID : $scope.findPatient.patientID
+		// 	}
+		// }).then(function successCallback(response) {
+		// 	$scope.responseData = response.data;
+		//   	// console.log(response.data);
+		//   }, function errorCallback(response) {
+		//     // called asynchronously if an error occurs
+		//     // or server returns response with an error status.
+		//   });
   		};
 
   	//---------------------------------------Add patient's basic data-----------------------------------------------//
@@ -130,5 +131,7 @@ angular.module('walveApp')
 		}
   		
   	};
+
+
 
   });
