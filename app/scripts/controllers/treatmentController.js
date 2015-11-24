@@ -33,6 +33,7 @@ angular.module('walveApp')
   	$scope.diagnose.detail = '';
 
   	$scope.medication = [];
+  	$scope.medication.medCount = 1;
 
   	$scope.calendar = [];
   	$scope.calendar.hideHn = false;
@@ -116,6 +117,16 @@ angular.module('walveApp')
 		    // or server returns response with an error status.
 		  });
   		};
+
+  	$scope.medication.addrow = function(){
+  		var medication = document.getElementById("medicationBody");
+		var new_row = medication.insertRow(medication.rows.length);
+		new_row.insertCell(0).innerHTML = ++$scope.medication.medCount;
+		new_row.insertCell(1);
+		new_row.insertCell(2);
+		new_row.insertCell(3);
+		new_row.insertCell(4);
+  	}
 
   	function fillTableData(data){
   		for (var k = 0; k < data.length; k++) {
