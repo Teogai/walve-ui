@@ -25,12 +25,14 @@ angular.module('walveApp')
   	$scope.basicData.duration = '';
   	$scope.basicData.drugAllergy = '';
 
-	$scope.editDiagnose = false;
+	$scope.editDiagnose = true;
   	$scope.diagnose = [];
   	$scope.diagnose.icd10 = '';
   	$scope.diagnose.method = '';
   	$scope.diagnose.medicineList = '';
   	$scope.diagnose.detail = '';
+
+  	$scope.medication = [];
 
   	$scope.calendar = [];
   	$scope.calendar.hideHn = false;
@@ -38,6 +40,8 @@ angular.module('walveApp')
 	//---------------------------------------Input to find Patient-----------------------------------//
    	
    	$scope.diagnose.submit = function(){
+   		$scope.editBasicData = true;
+  		$scope.editDiagnose = true;
    		$scope.showTreatment = false;
   // 		$http({
   // 			method: 'POST',
@@ -59,8 +63,9 @@ angular.module('walveApp')
 
   	//---------------------------------------Add patient's basic data-----------------------------------------------//
   	$scope.basicData.submit = function(){
-  		$scope.editBasicData = false;
+  		$scope.editBasicData = true;
   		$scope.editDiagnose = true;
+  		$scope.showTreatment = false;
   		$http({
   			method: 'POST',
 			url: $scope.global.laravelURL + 'treatment2',
@@ -74,6 +79,34 @@ angular.module('walveApp')
 				temperature: $scope.basicData.temperature,
 				heartRate: $scope.basicData.heartRate,
 				pressure: $scope.basicData.pressure
+			}
+		}).then(function successCallback(response) {
+			
+			$scope.responseData = response.data;
+		  }, function errorCallback(response) {
+		    // called asynchronously if an error occurs
+		    // or server returns response with an error status.
+		  });
+  		};
+
+  	//---------------------------------------Add patient's basic data-----------------------------------------------//
+  	$scope.medication.submit = function(){
+  		$scope.editBasicData = true;
+  		$scope.editDiagnose = true;
+  		$scope.showTreatment = false;
+  		$http({
+  			method: 'POST',
+			url: $scope.global.laravelURL + 'treatment3',
+			headers: {
+			'Content-Type': 'application/json'
+			},
+			data: { 
+				// patientID : $scope.findPatient.patientID,
+				// weight: $scope.basicData.weight,
+				// height: $scope.basicData.height,
+				// temperature: $scope.basicData.temperature,
+				// heartRate: $scope.basicData.heartRate,
+				// pressure: $scope.basicData.pressure
 			}
 		}).then(function successCallback(response) {
 			
