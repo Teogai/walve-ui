@@ -11,7 +11,7 @@
             <li ui-sref-active="active" ng-hide="global.user==[] || global.user.type=='patient'">
                 <a ui-sref="dashboard.schedule"><i class="fa fa-calendar fa-fw"></i> SCHEDULE</a>
             </li>
-            <li ui-sref-active="active" ng-hide="global.user==[] || global.user.data.type!='doctor'">
+            <li ui-sref-active="active" ng-hide="global.user==[] || global.user.type=='patient'">
                 <a ui-sref="dashboard.treatment"><i class="fa fa-edit fa-fw"></i> TREATMENT</a>
             </li>
         </ul>
