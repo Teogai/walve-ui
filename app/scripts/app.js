@@ -217,7 +217,8 @@ angular
             return $ocLazyLoad.load({
               name:'walveApp',
               files:[
-                'scripts/controllers/treatmentController.js'
+                'scripts/controllers/treatmentController.js',
+                'scripts/directives/calendar/calendar.js'
               ]
             })
           }
@@ -258,6 +259,10 @@ angular
       .state('login',{
         templateUrl:'views/pages/login.html',
         url:'/login'
+    })
+      .state('loginError',{
+        templateUrl:'views/pages/login-error.html',
+        url:'/loginerror'
     })
     // =========== Framework pages ==========
       .state('dashboard.dash',{

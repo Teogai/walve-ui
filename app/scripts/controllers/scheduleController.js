@@ -11,18 +11,6 @@ angular.module('walveApp')
   	$scope.laravelURL = '../../public/';
   	$scope.showMenu = false;
 
-   	function setTypes(){
-  		$scope.makeData.types = [{
-		  	id: 1,
-		  	label: 'Department',
-		  	details: $scope.departmentList,
-		}, {
-			id: 2,
-			label: 'Doctor',
-			details: $scope.doctorList,
-		}];
-  	}
-
   	$scope.getDepartmentList = function(){
   		$http({
   			method: 'POST',
@@ -49,7 +37,6 @@ angular.module('walveApp')
 			}
 		}).then(function successCallback(response) {
 			$scope.doctorList = response.data;
-		  	setTypes();
 		  }, function errorCallback(response) {
 		    // called asynchronously if an error occurs
 		    // or server returns response with an error status.

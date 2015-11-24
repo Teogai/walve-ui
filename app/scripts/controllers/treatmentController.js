@@ -8,6 +8,8 @@
  */
 angular.module('walveApp')
   .controller('TreatmentCtrl', function($scope, $http) {
+	$scope.showTreatment = false;
+
   	$scope.findPatient = [];
   	$scope.findPatient.patientID = '';
 
@@ -29,6 +31,9 @@ angular.module('walveApp')
   	$scope.diagnose.method = '';
   	$scope.diagnose.medicineList = '';
   	$scope.diagnose.detail = '';
+
+  	$scope.calendar = [];
+  	$scope.calendar.hideHn = false;
 	
 	//---------------------------------------Input to find Patient-----------------------------------//
    	
@@ -77,4 +82,53 @@ angular.module('walveApp')
 		    // or server returns response with an error status.
 		  });
   		};
+
+  	function fillTableData(data){
+  		for (var k = 0; k < data.length; k++) {
+  			for (var i = 0; i < data[k].length; i++) {
+				if(data[k][i].schedule_id != i + 1) {
+					var n = data[k][i].schedule_id - i - 1;
+					for (var j = 0; j < n ; j++) {
+						data[k].splice(i,0,null);
+						i++;
+					}
+				}
+			}
+  		};
+		
+		return data;
+	};
+
+	$scope.calendar.updateInsideTable = function(){  
+		var date = $scope.calendar.curMon.getDate();
+		var month = $scope.calendar.curMon.getMonth() + 1;
+		var year = $scope.calendar.curMon.getFullYear();
+
+		var fullDate = year + '-' + month + '-' + date;
+
+		$http({
+			method: 'POST',
+			url: $scope.global.laravelURL + 'appointment/getcalendardata',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			data: {
+				selectedDoctor: $scope.global.user.data,
+				date: fullDate
+			}
+		}).then(function successCallback(response) {
+			$scope.calendar.table = fillTableData(response.data);
+		  }, function errorCallback(response) {
+		    // called asynchronously if an error occurs
+		    // or server returns response with an error status.
+		  });
+	 };
+
+  	$scope.calendar.clicked = function (i, j) {
+  		if($scope.calendar.table[i][j].hospital_number!=null){
+				$scope.showTreatment = true;
+		}
+  		
+  	};
+
   });
