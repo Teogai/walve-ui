@@ -144,5 +144,10 @@ a:focus, a:hover {
 .center-block {
     display: table;
     margin: 0 auto;
+
+}
+
+.tooLong {
+    width: 100px;
 }
 

@@ -8,6 +8,10 @@
  */
 angular.module('walveApp')
   .controller('AppointmentCtrl', function($scope, $http) {
+
+  console.log($scope.global.patientData);
+  			
+
   	
   	function setTypes(){
   		$scope.makeData.types = [{

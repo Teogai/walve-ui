@@ -85,22 +85,24 @@ angular.module('walveApp')
 
 		var fullDate = year + '-' + month + '-' + date;
 
-		$http({
-			method: 'POST',
-		url: $scope.global.laravelURL + 'appointment/getcalendardata',
-		headers: {
-			'Content-Type': 'application/json'
-		},
-		data: {
-			selectedDoctor: $scope.selectedDoctor,
-			date: fullDate
-		}
-	}).then(function successCallback(response) {
-		$scope.calendar.table = fillTableData(response.data);
-	  }, function errorCallback(response) {
-	    // called asynchronously if an error occurs
-	    // or server returns response with an error status.
-	  });
+		if($scope.selectedDoctor.length!=0){
+			$http({
+				method: 'POST',
+			url: $scope.global.laravelURL + 'appointment/getcalendardata',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			data: {
+				selectedDoctor: $scope.selectedDoctor,
+				date: fullDate
+			}
+		}).then(function successCallback(response) {
+			$scope.calendar.table = fillTableData(response.data);
+		  }, function errorCallback(response) {
+		    // called asynchronously if an error occurs
+		    // or server returns response with an error status.
+		  });
+		}	
   	};
 
 
